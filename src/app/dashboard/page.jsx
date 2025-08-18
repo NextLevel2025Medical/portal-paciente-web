@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Image from 'next/image' // para otimização de imagem
 
@@ -121,7 +121,7 @@ function collectRegionsFromData(data) {
   return found.size ? Array.from(found) : ['abdomen']; // fallback
 }
 
-export default function Dashboard(){
+function DashboardInner(){
   const sp = useSearchParams()
   const router = useRouter()
   const patientId = sp.get('patient_id')
@@ -144,6 +144,16 @@ const toggleOferta = (idx) => {
     prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
   );
 };
+
+export default function Dashboard() {
+  return (
+    <Suspense fallback={null}>
+      <DashboardInner />
+    </Suspense>
+  );
+}
+
+export const dynamic = 'force-dynamic';
 
 const contratarSelecionadas = () => {
   if (!ofertasSelecionadas.length) return;
