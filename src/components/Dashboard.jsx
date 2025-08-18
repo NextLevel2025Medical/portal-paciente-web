@@ -21,7 +21,8 @@ const fmtBRL = (v) =>
 const fmtData = (s) => {
   try {
     const [y, m, d] = s.split('-');
-    return `${d}/${m}/${y}`;
+    const isPhone = typeof window !== 'undefined' && window.innerWidth <= 420;
+    return isPhone ? `${d}/${m}/${String(y).slice(2)}` : `${d}/${m}/${y}`;
   } catch {
     return s;
   }
