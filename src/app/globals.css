@@ -950,5 +950,58 @@ html, body { overflow-x: hidden; }
 /* 3) Segurança contra “vazamento” de largura */
 .grid-1 > *, .grid-2 > *, .panel, .panel * { min-width: 0; }
 
+/* ===================== QUEBRA DE TEXTO – MOBILE ===================== */
+@media (max-width: 980px){
+
+  /* 1) EVOLUÇÃO DOS PAGAMENTOS */
+  /* sua tabela é a .table.compact logo após o título "EVOLUÇÃO..." */
+  .block-title + .panel > .table.compact{
+    table-layout: auto;        /* deixa as colunas se adaptarem */
+    width: 100%;
+  }
+  /* cabeçalho e corpo podem quebrar; sem reticências */
+  .block-title + .panel > .table.compact th,
+  .block-title + .panel > .table.compact td{
+    white-space: normal;        /* permite várias linhas */
+    overflow-wrap: anywhere;    /* quebra palavras/valores quando precisar */
+    word-break: break-word;     /* garante quebra em iOS */
+    text-overflow: clip;
+    line-height: 1.25;
+    padding: 8px 8px;
+    vertical-align: top;
+  }
+
+  /* botão da área de pagamentos nunca estoura a largura */
+  .pay-actions .btn-cta{
+    white-space: normal;
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  /* 2) POSSIBILIDADES ADICIONAIS */
+  /* header + corpo possuem duas <table>. Alvo pelas classes de coluna existentes */
+  .stack-panel .table th.col-service,
+  .stack-panel .table td.col-service,
+  .stack-panel .table th.col-red,
+  .stack-panel .table td.col-red,
+  .stack-panel .table th.col-green,
+  .stack-panel .table td.col-green,
+  .stack-panel .table th.col-action,
+  .stack-panel .table td.col-action{
+    white-space: normal;        /* antes estava nowrap em alguns pontos */
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    text-overflow: clip;
+    line-height: 1.25;
+  }
+
+  /* se o nome do serviço puder ocupar todas as linhas (sem clamp) */
+  .stack-panel .table .svc-name > div{
+    display: block;             /* remove o line-clamp opcional */
+    -webkit-line-clamp: initial;
+    -webkit-box-orient: initial;
+    overflow: visible;
+  }
+}
 
 
