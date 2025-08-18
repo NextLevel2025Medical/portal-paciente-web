@@ -1,7 +1,6 @@
-"use client";
-import dynamic from "next/dynamic";
+'use client';
 import { useState } from "react";
-
+import dynamic from "next/dynamic"; // aqui pode manter 'dynamic' porque NÃO vamos exportar 'dynamic' neste arquivo
 const Viewer = dynamic(() => import("./Viewer"), { ssr: false });
 
 export default function Page() {

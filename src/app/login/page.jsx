@@ -11,6 +11,8 @@ const maskCPF = (v='') => {
     .replace(/\.(\d{3})(\d)/, '.$1-$2')
 }
 
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
+
 export default function LoginPage(){
   const router = useRouter()
   const [cpf,setCpf] = useState('')
@@ -19,33 +21,11 @@ export default function LoginPage(){
   const [loading,setLoading] = useState(false)
   const [err,setErr] = useState('')
 
-  async function onSubmit(e){
-  e.preventDefault();
-  const cpfNum = cpf.replace(/\D+/g, '');        // limpa máscara
-  const r = await fetch('http://127.0.0.1:8000/auth/login', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ cpf: cpfNum, password })
-  });
-
-  const res = await r.json();
-  if(!r.ok){ setErr(res?.detail || 'Falha no login'); return; }
-
-  // guarda o cpf se quiser usar como fallback depois
-  localStorage.setItem('cpf', res.cpf);
-
-  // 👇 use os nomes corretos
-  router.push(
-        `/dashboard?patient_id=${res.patient_id}&name=${encodeURIComponent(res.name)}&cpf=${res.cpf}`
-      );
-}
-
   const submit = async (e)=>{
     e.preventDefault()
-    setErr('')
-    setLoading(true)
+    setLoading(true); setErr('');
     try{
-      const r = await fetch('http://127.0.0.1:8000/auth/login',{
+      const r = await fetch(`${API_BASE}/auth/login`, {
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ cpf: onlyDigits(cpf), password })
@@ -55,8 +35,8 @@ export default function LoginPage(){
         throw new Error(j?.detail || 'Falha no login')
       }
       const j = await r.json()
-      // opcional: guarda o cpf para fallback no dashboard      localStorage.setItem('cpf', j.cpf);
-      router.push(`/dashboard?patient_id=${j.patient_id}&name=${encodeURIComponent(j.name)}&cpf=${j.cpf}`);
+      // TODO: salvar token se necessário
+      router.push(`/dashboard?patient_id=${encodeURIComponent(j.patient_id)}&name=${encodeURIComponent(j.name)}&cpf=${encodeURIComponent(j.cpf)}`);
     }catch(e){
       setErr(e.message || 'Não foi possível entrar')
     }finally{

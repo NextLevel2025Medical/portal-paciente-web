@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useMemo, useState, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
+import nextDynamic from 'next/dynamic';                    // ✅ renomeado
 import Image from 'next/image' // para otimização de imagem
 
 const fmtBRL = v => new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(v)
@@ -165,7 +166,7 @@ const contratarSelecionadas = () => {
 
   useEffect(()=>{
     if(!patientId) return
-    const base = `http://127.0.0.1:8000/patient/${patientId}/summary`
+    const base = `${API_BASE}/patient/${patientId}/summary`
     const qs   = cpf
       ? `?cpf=${encodeURIComponent(cpf)}&debug=1`
       : (invoiceIdQS ? `?invoice_id=${encodeURIComponent(invoiceIdQS)}&debug=1` : '?debug=1')
