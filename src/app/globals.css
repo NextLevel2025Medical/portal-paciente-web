@@ -1062,3 +1062,15 @@ html, body { overflow-x: hidden; }
 /* segurança: itens de grid não estouram */
 .grid-2 > * { min-width: 0; }
 
+/* ===== Correção de box-model + largura do container ===== */
+*, *::before, *::after { box-sizing: border-box; }   /* evita width+padding > viewport */
+
+/* container global não pode usar 100vw com padding (estoura). Use width:100% */
+.container { width: 100%; max-width: 1500px; margin: 0 auto; padding-inline: 10px; }
+@media (max-width: 480px){
+  .container { padding-inline: 8px; }               /* ganha uns px no iPhone */
+}
+
+/* segurança: nada passa da largura do container */
+.wrap, .panel, .panel > * { max-width: 100%; }
+html, body, .container, .wrap { overflow-x: clip; }  /* clipa qualquer sobra de 1-2px do iOS */
