@@ -316,12 +316,12 @@ export default function Dashboard() {
       <div className="header">
         <div className="brand">
           <Image
-            src="/logo-concept.png"
-            alt="Concept Clinic"
-            width={450}
-            height={150}
-            className="brand-logo"
-            priority
+              src="/logo-concept.png"
+              alt="Concept Clinic"
+              width={450}
+              height={150}
+              className="brand-logo"
+              sizes="(max-width: 700px) 60vw, 220px"
           />
         </div>
         <a className="link logout" onClick={() => router.push('/login')}>
