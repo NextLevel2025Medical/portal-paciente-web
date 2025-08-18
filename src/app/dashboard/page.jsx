@@ -1,17 +1,14 @@
 'use client';
+
 import { Suspense } from 'react';
+import Dashboard from '../../components/Dashboard';
 
-function DashboardInner() {
-  // TODO: TODO o seu componente aqui (estados/effects/JSX)
-  return <div className="wrap">{/* seu JSX */}</div>;
-}
+export const dynamic = 'force-dynamic';
 
-export default function Dashboard() {
+export default function DashboardPage() {
   return (
     <Suspense fallback={null}>
-      <DashboardInner />
+      <Dashboard />
     </Suspense>
   );
 }
-
-export const dynamic = 'force-dynamic';
