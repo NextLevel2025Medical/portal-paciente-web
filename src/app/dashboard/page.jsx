@@ -37,8 +37,8 @@ const copiarPix = async () => {
   try { await navigator.clipboard.writeText(PIX_KEY) } catch {}
 }
 
-import dynamic from 'next/dynamic';
-const Viewer = dynamic(() => import('../visualizador/Viewer'), { ssr: false });
+import nextDynamic from 'next/dynamic';
+const Viewer = nextDynamic(() => import('../visualizador/Viewer'), { ssr: false });
 
 // === Palavras-chave -> regiões do Viewer ===
 // (as chaves precisam existir no REGION_MASKS do Viewer: face, braco, mama, abdomen, coxa, gluteos, costas, umbigo)
