@@ -588,7 +588,14 @@ html, body { overflow-x: hidden; }
   gap: 18px; 
   grid-template-columns: 1.1fr 1fr }
   @media (max-width: 980px){
+  .grid-1 { grid-template-columns: 1fr; }
 }
+
+/* 👇 evita overflow quando algum painel tem largura mínima grande */
+.grid-1 > * { min-width: 0; }
+
+/* segurança extra para mídias dentro do grid */
+.grid-1 img, .grid-1 canvas, .grid-1 svg { max-width: 100%; height: auto; }
 
 /* coluna da direita: viewer ocupa todo o espaço livre */
 .right-col{
