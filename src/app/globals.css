@@ -880,3 +880,75 @@ html, body { overflow-x: hidden; }
 /* Botões longos (ex.: “Contratar selecionados” / “Realizar novo pagamento”) */
 .btn-cta, .btn-primary{ font-size: clamp(14px, 3.8vw, 16px); white-space: normal; }
 
+/* ===================== AJUSTES FINOS – MOBILE ===================== */
+
+/* 1) EVOLUÇÃO DOS PAGAMENTOS
+   Seleciona a 1ª tabela que vem logo depois de um .block-title */
+@media (max-width: 980px){
+  .block-title + .panel > .table.compact{
+    table-layout: fixed;
+    width: 100%;
+  }
+  /* colunas proporcionais pensadas para caber “R$ 9.420,00” */
+  .block-title + .panel > .table.compact thead th:nth-child(1){ width: 18%; } /* Data */
+  .block-title + .panel > .table.compact thead th:nth-child(2){ width: 22%; } /* Valor */
+  .block-title + .panel > .table.compact thead th:nth-child(3){ width: 18%; } /* Forma */
+  .block-title + .panel > .table.compact thead th:nth-child(4){ width: 21%; } /* Acumulado */
+  .block-title + .panel > .table.compact thead th:nth-child(5){ width: 21%; } /* Valor a Pagar */
+
+  /* cabeçalho pode quebrar linha (ex.: “Valor a Pagar”), números não */
+  .block-title + .panel > .table.compact thead th{ white-space: normal; }
+  .block-title + .panel > .table.compact tbody td{ white-space: nowrap; }
+
+  /* tipografia compacta + paddings menores */
+  .block-title + .panel > .table.compact th,
+  .block-title + .panel > .table.compact td{
+    font-size: clamp(11px, 3.2vw, 13px);
+    padding: 8px 8px;
+    vertical-align: middle;
+  }
+}
+
+/* 2) POSSIBILIDADES ADICIONAIS
+   (a sua lista usa duas <table>: cabeçalho e corpo dentro de um <div> rolável) */
+@media (max-width: 980px){
+  /* larguras mais folgadas para os números */
+  .stack-panel .table th.col-service, .stack-panel .table td.col-service { width: 44%; }
+  .stack-panel .table th.col-red,     .stack-panel .table td.col-red     { width: 22%; }
+  .stack-panel .table th.col-green,   .stack-panel .table td.col-green   { width: 22%; }
+  .stack-panel .table th.col-action,  .stack-panel .table td.col-action  { width: 12%; min-width: 44px; text-align:center; }
+
+  /* números: não cortar + tamanho menor */
+  .stack-panel .table td.col-red,
+  .stack-panel .table td.col-green{
+    white-space: nowrap;
+    font-size: clamp(11px, 3.2vw, 12.5px);
+    padding-right: 4px;
+    letter-spacing: -0.1px; /* só para ganhar alguns px sem perder legibilidade */
+  }
+
+  /* cabeçalho pode quebrar linha; encurtar “Selecionar” visualmente */
+  .stack-panel .table thead th{ white-space: normal; }
+  .stack-panel .table thead th.col-action{
+    font-size: 0; min-width: 44px; position: relative;
+  }
+  .stack-panel .table thead th.col-action::after{
+    content: "Sel."; font-size: 12px;
+    position: relative; top: 0;
+  }
+
+  /* itens muito longos do nome do serviço: no máximo 2 linhas */
+  .stack-panel .table .svc-name > div{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.2;
+  }
+}
+
+/* 3) Segurança contra “vazamento” de largura */
+.grid-1 > *, .grid-2 > *, .panel, .panel * { min-width: 0; }
+
+
+
