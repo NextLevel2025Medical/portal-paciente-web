@@ -145,16 +145,6 @@ const toggleOferta = (idx) => {
   );
 };
 
-export default function Dashboard() {
-  return (
-    <Suspense fallback={null}>
-      <DashboardInner />
-    </Suspense>
-  );
-}
-
-export const dynamic = 'force-dynamic';
-
 const contratarSelecionadas = () => {
   if (!ofertasSelecionadas.length) return;
 
@@ -617,5 +607,14 @@ const getApptMeta = (a) => {
         }
       `}</style>
     </div>
+    export default function Dashboard() {
+      return (
+        <Suspense fallback={null}>
+          <DashboardInner />
+        </Suspense>
+      )
+    }
+
+    export const dynamic = 'force-dynamic';
   )
 }
