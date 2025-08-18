@@ -582,21 +582,19 @@ html, body { overflow-x: hidden; }
 @media (max-width: 980px){
   .viewer-box { height: 420px; }
 }
-/* faz as duas colunas esticarem igualmente na vertical */
-.grid-1{ 
-  display:grid;
-  gap: 18px; 
-  grid-template-columns: 1.1fr 1fr }
-  @media (max-width: 980px){
-  .grid-1 { grid-template-columns: 1fr; }
+
+/* duas colunas no desktop, uma no mobile */
+.grid-1{
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0,1.1fr) minmax(0,1fr);
+  align-items: stretch;
 }
-
-/* 👇 evita overflow quando algum painel tem largura mínima grande */
-.grid-1 > * { min-width: 0; }
-
-/* segurança extra para mídias dentro do grid */
-.grid-1 img, .grid-1 canvas, .grid-1 svg { max-width: 100%; height: auto; }
-
+@media (max-width: 980px){
+  .grid-1{ grid-template-columns: 1fr; }
+  .right-col{ grid-template-rows: auto auto; }     /* viewer acima, agendamentos abaixo */
+  .viewer-box{ height: 420px; min-height: 320px; } /* altura amigável no celular */
+}
 /* coluna da direita: viewer ocupa todo o espaço livre */
 .right-col{
   display: grid;
