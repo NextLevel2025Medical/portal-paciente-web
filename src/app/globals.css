@@ -1,3 +1,20 @@
+/* ===== Mobile base ===== */
+img, svg { max-width: 100%; height: auto; }
+
+/* Evita zoom no foco do iOS (inputs <16px provocam zoom) */
+input, select, textarea { font-size: 16px; }
+
+/* Ajustes de logos no header */
+.brand-logo { width: clamp(140px, 40vw, 220px); height: auto; }
+.logout-ico { width: clamp(20px, 12vw, 36px); height: auto; }
+
+/* Login: cartão centralizado e fluido no celular */
+.auth-wrap { min-height: 100svh; display: grid; place-items: center; padding: 16px; }
+.auth-card { width: min(92vw, 440px); margin: 0 auto; }
+
+/* Evita rolagem horizontal em qualquer página */
+html, body { overflow-x: hidden; }
+
 :root{
   --bg:#0f1115;
   --panel:#151923;
