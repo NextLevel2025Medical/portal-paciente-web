@@ -426,43 +426,54 @@ export default function Dashboard() {
             <div className="panel" style={{ marginBottom: 0 }}>
               {allSuggs.length ? (
                 <>
-                  <table className="table compact allow-overflow" style={{ tableLayout: 'fixed', width: '100%' }}>
-                    <thead>
-                      <tr>
-                        <th className="col-service">Serviço</th>
-                        <th className="col-red">Valor avulso</th>
-                        <th className="col-green">No dia da sua cirurgia</th>
-                        <th className="col-action">Selecionar</th>
-                      </tr>
-                    </thead>
-                  </table>
-
-                  <div style={{ maxHeight: 180, overflowY: 'auto' }}>
-                    <table className="table compact" style={{ tableLayout: 'fixed', width: '100%' }}>
-                      <tbody>
+                <table className="table compact addons-head">
+                <colgroup>
+                    <col className="col-service" />
+                    <col className="col-red" />
+                    <col className="col-green" />
+                    <col className="col-action" />
+                </colgroup>
+                <thead>
+                    <tr>
+                    <th className="col-service">Serviço</th>
+                    <th className="col-red">Valor avulso</th>
+                    <th className="col-green">No dia da sua cirurgia</th>
+                    <th className="col-action">Selecionar</th>
+                    </tr>
+                </thead>
+                </table>
+                    <div className="addons-scroll" style={{ maxHeight: 180, overflowY: 'auto' }}>
+                    <table className="table compact addons-body">
+                        <colgroup>
+                        <col className="col-service" />
+                        <col className="col-red" />
+                        <col className="col-green" />
+                        <col className="col-action" />
+                        </colgroup>
+                        <tbody>
                         {allSuggs.map((o, i) => (
-                          <tr key={i}>
+                            <tr key={i}>
                             <td>
-                              <span className="svc-name">
+                                <span className="svc-name">
                                 <div>{o.nome}</div>
                                 {o._region && <span className="chip small">{o._region}</span>}
-                              </span>
+                                </span>
                             </td>
                             <td className="col-red">{fmtBRL(o.avulso)}</td>
                             <td className="col-green">{fmtBRL(o.momento)}</td>
                             <td className="col-action">
-                              <input
+                                <input
                                 type="checkbox"
                                 className="checkbox-premium"
                                 checked={ofertasSelecionadas.includes(i)}
                                 onChange={() => toggleOferta(i)}
-                              />
+                                />
                             </td>
-                          </tr>
+                            </tr>
                         ))}
-                      </tbody>
+                        </tbody>
                     </table>
-                  </div>
+                    </div>
                 </>
               ) : (
                 <p className="sub">Sem sugestões no momento.</p>
