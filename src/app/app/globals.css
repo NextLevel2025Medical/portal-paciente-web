@@ -1,0 +1,637 @@
+:root{
+  --bg:#0f1115;
+  --panel:#151923;
+  --panel-2:#1a2030;
+  --text:#e8ecf1;
+  --muted:#a8b0bf;
+  --accent:#e2b857;  /* dourado Concept vibes */
+  --ok:#1fbf75;
+  --warn:#f5a524;
+  --danger:#ef4444;
+  --border:#2a3142;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial;
+}
+
+.container{
+  max-width: min(96vw, 1600px);
+  margin: 16px auto;
+  padding: 0 16px;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin: 8px 0 20px;
+}
+.header .link{
+  color: var(--accent);
+  font-weight: 700;
+  cursor: pointer;
+}
+.header .link:hover{ filter: brightness(1.1); }
+
+.brand{display:flex; gap:10px; align-items:center;}
+.logo{
+  width:36px; height:36px; border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, #fff2, transparent 60%), var(--panel-2);
+  border:1px solid var(--border);
+}
+.brand h1{font-size:18px; margin:0; letter-spacing:.5px}
+.card-grid{
+  display:grid; gap:16px; grid-template-columns: repeat(3, minmax(0,1fr));
+}
+.card{
+  background:linear-gradient(180deg, var(--panel), var(--panel-2));
+  border:1px solid var(--border); border-radius:16px; padding:16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
+}
+.card h3{margin:0 0 8px 0; font-weight:600; color:var(--muted); font-size:13px}
+.kpi{font-size:24px; font-weight:700}
+
+.section{margin-top:28px}
+.section h2{font-size:16px; margin:0 0 12px 0; font-weight:700}
+
+.table{
+  width:100%; border-collapse:collapse; border:1px solid var(--border);
+  background: var(--panel);
+  border-radius:12px; overflow:hidden;
+}
+.table th,.table td{padding:10px 12px; border-bottom:1px solid var(--border)}
+.table th{background:var(--panel-2); text-align:left; color:var(--muted); font-weight:600; font-size:13px}
+.table tr:last-child td{border-bottom:0}
+
+.badge{display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; border:1px solid var(--border)}
+.badge.ok{background:#1fbf7511; color:var(--ok)}
+.badge.warn{background:#f5a52411; color:var(--warn)}
+.badge.todo{background:#3b82f611; color:#60a5fa}
+
+.list{list-style:none; padding:0; margin:0}
+.list li{padding:10px 12px; background:var(--panel); border:1px solid var(--border); border-radius:12px; margin-bottom:8px}
+.mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:var(--muted)}
+.link{color:var(--accent); text-decoration:none}
+.input, .btn{
+  width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border);
+  background:var(--panel); color:var(--text);
+}
+.form{max-width:400px; margin:80px auto}
+.btn{background:linear-gradient(180deg,#2a3142,#202735); cursor:pointer; font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.row{display:flex; gap:12px}
+
+/* ===== layout 2 colunas ===== */
+.grid-2{
+  display:grid; gap:20px;
+  grid-template-columns: 1.5fr 1fr;   /* esquerda maior que direita */
+}
+@media (max-width: 980px){
+  .grid-2{ grid-template-columns: 1fr; }
+}
+
+/* painéis */
+.panel{
+  background:linear-gradient(180deg, var(--panel), var(--panel-2));
+  border:1px solid var(--border);
+  border-radius:16px; padding:16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
+}
+.panel h3{ margin:0 0 12px 0; font-size:16px; }
+.sub{ color:var(--muted); font-size:13px }
+
+/* tabela “excel-like” */
+.table.compact td,.table.compact th{ padding:8px 10px; }
+
+/* coloração para oportunidades */
+.col-red{ background:#ef444411; }
+.col-green{ background:#22c55e11; }
+.table .col-red, .table .col-green{ border-left:1px solid var(--border); }
+
+/* blocos com título estilo seção */
+.block-title{
+  margin: 26px 0 10px; font-weight:700; font-size:16px;
+}
+
+/* badges de status já existem, só reforço cores */
+.badge.agendado{ background:#f5a52411; color:var(--warn) }
+.badge.realizado{ background:#1fbf7511; color:var(--ok) }
+.badge.pendente{ background:#3b82f611; color:#60a5fa }
+
+.fab-whatsapp{
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 56px; height: 56px;
+  border-radius: 999px;
+  background: #25D366; /* verde WhatsApp */
+  color: white;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 10px 25px rgba(0,0,0,.35);
+  text-decoration:none;
+  z-index: 1000;
+  transition: transform .15s ease, filter .15s ease;
+}
+.fab-whatsapp:hover{ filter: brightness(1.05); transform: translateY(-2px); }
+.fab-whatsapp svg{ width: 28px; height: 28px; }
+
+/* Cor dos títulos = cor da logo/botão (usa --accent) */
+h1, h2, h3, h4, h5, h6 { color: var(--accent); }
+
+/* Títulos de seção (Procedimentos, Agendamentos, etc.) */
+.block-title { 
+  margin: 26px 0 10px; 
+  font-weight: 700; 
+  font-size: 16px; 
+  color: var(--accent);
+}
+
+.welcome {
+  color: var(--accent) !important;
+}
+/* Ajuste lista de procedimentos */
+.panel .list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.panel .list li {
+  padding: 4px 8px;          /* Menor altura */
+  margin: 0;
+  white-space: nowrap;       /* Impede quebra de linha */
+  overflow: hidden;          /* Oculta excesso */
+  text-overflow: ellipsis;   /* Adiciona reticências */
+  line-height: 1.4;          /* Compacta verticalmente */
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  margin-bottom: 4px;        /* Pequeno espaçamento entre itens */
+}
+
+.panel .list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Força cor de fundo + texto nos valores da tabela de oportunidades */
+.table td.col-red{
+  background: rgba(239, 68, 68, .14) !important; /* vermelho suave */
+  color: #ef4444 !important;
+}
+.table td.col-green{
+  background: rgba(34, 197, 94, .14) !important; /* verde suave */
+  color: #22c55e !important;
+}
+/* opcional: uma borda interna para destacar as colunas */
+.table td.col-red, .table td.col-green{
+  border-left: 1px solid var(--border);
+}
+
+/* nome com tooltip */
+.svc-name { cursor: help; }
+
+/* preço verde + botão lado a lado */
+.table td.col-green .cell-cta{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;          /* quebra no mobile se faltar espaço */
+}
+
+/* botão CTA pequeno */
+.btn-cta{
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 0;
+  background: var(--accent);
+  color: #111;              /* contraste no dourado */
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
+  transition: transform .12s ease, filter .12s ease;
+}
+.btn-cta:hover{ filter: brightness(1.05); transform: translateY(-1px); }
+.btn-cta:active{ transform: translateY(0); }
+
+/* mantém o verde de fundo e não “puxa” o botão para verde */
+.table td.col-green { position: relative; }
+
+/* botão abaixo da tabela */
+.pay-actions{
+  margin-top:12px;
+  display:flex;
+  justify-content:flex-end;
+}
+
+/* ===== Modal ===== */
+.modal-backdrop{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.55);
+  display:flex; align-items:center; justify-content:center;
+  z-index: 1000;
+}
+.modal{
+  width: min(640px, 94vw);
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border:1px solid var(--border);
+  border-radius:16px; padding:18px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.45);
+}
+.modal-options{
+  display:grid; grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:10px; margin: 12px 0 6px;
+}
+.btn-choice{
+  padding:10px 12px; border-radius:10px; border:1px solid var(--border);
+  background: var(--panel); color: var(--text); cursor:pointer; font-weight:600;
+}
+.btn-choice:hover{ filter: brightness(1.05); }
+
+.modal-actions{
+  display:flex; justify-content:flex-end; margin-top:12px; gap:8px;
+}
+.btn-ghost{
+  padding:10px 12px; border-radius:10px; border:1px solid var(--border);
+  background: transparent; color: var(--text); cursor: pointer;
+}
+.btn-ghost:hover{ filter: brightness(1.1); }
+
+/* Pix box */
+.pix-box{
+  margin-top:12px; padding:12px;
+  border:1px solid var(--border); border-radius:12px;
+  background: rgba(255,255,255,.03);
+}
+.pix-row{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+}
+.pix-key{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: rgba(0,0,0,.25); padding:6px 10px; border-radius:8px;
+}
+.pix-img{ width:100%; height:auto; margin-top:10px; border-radius:12px; border:1px solid var(--border); }
+
+/* CTA padrão já usado no projeto */
+.btn-cta{
+  padding:8px 12px;
+  border-radius:10px;
+  border:0;
+  background: var(--accent);
+  color:#111;
+  font-weight:700;
+  font-size:13px;
+  cursor:pointer;
+  box-shadow:0 4px 14px rgba(0,0,0,.25);
+  transition: transform .12s ease, filter .12s ease;
+}
+.btn-cta:hover{ filter:brightness(1.05); transform: translateY(-1px); }
+
+@media (max-width: 640px){
+  .modal-options{ grid-template-columns: 1fr; }
+}
+
+html, body { overflow-x: hidden; }
+
+/* Tooltip com o visual da UI */
+.tooltip{
+  position: relative;
+  display: inline-block;
+  cursor: help;
+}
+.tooltip-panel{
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: translateY(8px) scale(.98);
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  min-width: 260px;
+  max-width: 360px;
+  color: var(--text);
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+  z-index: 20;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .12s ease, transform .12s ease, visibility .12s;
+}
+
+/* abre no hover e no focus (mobile/toque) */
+.tooltip:hover .tooltip-panel,
+.tooltip:focus-within .tooltip-panel{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(6px) scale(1);
+}
+
+/* triangulinho */
+.tooltip-panel::before{
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 16px;
+  border: 8px solid transparent;
+  border-bottom-color: var(--panel-2);
+  filter: drop-shadow(0 -1px 0 var(--border));
+}
+
+/* tipografia interna */
+.tip-title{
+  display: block;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.tip-text{
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.45;
+  white-space: normal;
+}
+/* a .table padrão continua com overflow:hidden (para os cantos) */
+/* mas a tabela com allow-overflow pode deixar o tooltip escapar */
+.table.allow-overflow{ overflow: visible; }
+
+/* por via das dúvidas, garanta que o painel também não corta */
+.panel{ overflow: visible; }
+
+/* suba o tooltip acima de linhas/cabeçalhos */
+.tooltip-panel{ z-index: 1000; }
+/* ===== Agendamentos melhorados ===== */
+.list .appt-item{
+  position: relative;
+  padding: 12px 14px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  /* faixa colorida à esquerda */
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+
+/* título */
+.appt-title{
+  font-weight: 700;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.25;
+}
+
+/* linha data + chip */
+.appt-row{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-top: 6px;
+  gap: 10px;
+  font-size: .95em;
+  opacity: .95;
+}
+
+/* status textual (original), discreto */
+.appt-status{
+  margin-top: 4px;
+  font-size: .9em;
+  color: var(--muted);
+}
+
+/* chips de status */
+.chip{
+  display:inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.03);
+}
+.chip.done{      color: var(--ok);    background: #1fbf7511; }
+.chip.upcoming{  color: #60a5fa;      background: #3b82f611; }
+.chip.pending{   color: var(--warn);  background: #f5a52411; }
+.chip.cancelled{ color: var(--danger);background: #ef444411; }
+.chip.missed{    color: #ff7a7a;      background: #ef444408; }
+
+/* faixas à esquerda por classe */
+.appt-item.done{      border-left-color: var(--ok); }
+.appt-item.upcoming{  border-left-color: #60a5fa; }
+.appt-item.pending{   border-left-color: var(--warn); }
+.appt-item.cancelled{ border-left-color: var(--danger); }
+.appt-item.missed{    border-left-color: #ff7a7a; }
+
+/* suaviza itens passados (exceto cancelado, que já é vermelho) */
+.appt-item.done .appt-title,
+.appt-item.missed .appt-title{
+  opacity: .95;
+}
+.appt-item.done{ filter: saturate(.95); }
+.appt-item.missed{ filter: grayscale(.1) saturate(.9); }
+.appt-prof{
+  margin-top: 4px;
+  font-weight: 600;
+  color: var(--text);
+  opacity: .9;
+}
+/* link SAIR com ícone */
+.logout{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);        /* dourado do tema */
+  font-weight: 700;
+  cursor: pointer;
+}
+.logout:hover{ filter: brightness(1.05); }
+
+.logout-ico{
+  width: 36px; 
+  height: 36px;
+  display: block;
+}
+/* ===== Login premium ===== */
+.auth-wrap{
+  min-height: 100vh;
+  padding: clamp(24px, 4vw, 48px);
+  display:flex; align-items:center; justify-content:center;
+  position: relative; overflow: hidden;
+  background: radial-gradient(1200px 600px at 10% -10%, #e2b85722, transparent 50%),
+              radial-gradient(900px 480px at 110% 110%, #1fbf7518, transparent 50%),
+              var(--bg);
+}
+
+.auth-card{
+  width: 100%;
+  max-width: 520px;
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+  padding: clamp(20px, 4vw, 28px);
+  position: relative; z-index: 1;
+}
+
+.brand-line{
+  text-align: center; margin-bottom: 18px;
+}
+.brand-logo{
+  height: 150px; width: auto; margin-bottom: 8px; object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.3));
+}
+.brand-line h1{
+  margin: 0; font-size: 22px; font-weight: 800; color: var(--accent); letter-spacing: .5px;
+}
+.brand-sub{
+  margin: 4px 0 0; color: var(--muted); font-size: 13px;
+}
+
+.auth-form{ margin-top: 18px; }
+
+.lbl{
+  display:block; margin: 14px 0 6px; font-weight: 600; color: var(--muted);
+}
+
+.input-wrap{
+  position: relative;
+}
+.input-wrap .input{
+  width:100%;
+  padding: 14px 44px 14px 14px;
+  border-radius: 12px;
+  border:1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  outline:none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.input-wrap .input:focus{
+  border-color: #e2b85766;
+  box-shadow: 0 0 0 3px #e2b85722;
+}
+.input-icon{
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  display: inline-flex; align-items:center; justify-content:center;
+  width: 28px; height: 28px; color: var(--muted);
+}
+.btn-eye{
+  background: transparent; border: 0; cursor: pointer;
+  border-radius: 8px;
+}
+.btn-eye:hover{ color: var(--accent); }
+
+.auth-error{
+  margin-top: 12px;
+  background: #ef444411; color: #fca5a5;
+  border: 1px solid #ef444466;
+  padding: 10px 12px; border-radius: 10px; font-size: 14px;
+}
+
+.btn-primary{
+  width:100%; margin-top: 16px;
+  padding: 12px 14px; border-radius: 12px; border:1px solid var(--border);
+  background: linear-gradient(180deg, #332b16, #2b2413);
+  color: #fff; font-weight: 700; cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,.35);
+  transition: transform .12s ease, filter .12s ease;
+}
+.btn-primary:hover{ filter: brightness(1.05); transform: translateY(-1px); }
+.btn-primary:disabled{ opacity:.7; cursor:not-allowed; }
+
+.form-foot{
+  margin-top: 12px; display:flex; justify-content: center;
+}
+
+.auth-glow{
+  position:absolute; inset: -30%;
+  background:
+    radial-gradient(600px 600px at 20% 0%, #e2b85720, transparent 60%),
+    radial-gradient(600px 600px at 120% 120%, #1fbf7518, transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* reaproveita o link dourado do tema */
+.link{ color: var(--accent); text-decoration:none }
+.link:hover{ text-decoration: underline; }
+
+/* Viewer 3D */
+.viewer-panel { padding: 0; }
+.viewer-box   { width: 100%; height: 620px; }
+@media (max-width: 980px){
+  .viewer-box { height: 420px; }
+}
+/* faz as duas colunas esticarem igualmente na vertical */
+.grid-2{ 
+  display:grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap:18px; 
+  align-items: stretch;            /* <— garante que a coluna direita estique */
+}
+
+
+/* coluna da direita: viewer ocupa todo o espaço livre */
+.right-col{
+  display: grid;
+  grid-template-rows: 1fr auto; /* 3D cresce | agendamentos ficam abaixo */
+  gap: 18px;
+}
+
+/* Deixe APENAS ISSO para o viewer */
+.viewer-box{
+  padding: 0;
+  overflow: hidden;
+  height: 100%;          /* 👈 faz o painel ocupar toda a altura da linha do grid */
+}
+
+/* Conteúdo interno do viewer */
+.viewer-box > div, .viewer-fill{
+  width: 100%;
+  height: 100%;          /* 👈 preenche o painel inteiro */
+  min-height: 560px;     /* opcional: altura mínima */
+  display: grid;
+  place-items: center;
+}
+/* garante que o canvas ocupe 100% */
+.viewer-box canvas{
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* painel do viewer preenche a linha inteira */
+.viewer-panel{
+  padding:0;
+  display:flex;
+  height:100%;                     /* <— ocupa toda a altura da linha (igual à da coluna esquerda) */
+}
+/* wrapper do Canvas ocupa tudo */
+.viewer-inner{
+  flex:1;
+  width:100%;
+  height:100%;
+  display:grid;
+}
+/* (se existir) remova altura fixa antiga */
+.viewer-box > div{ height:auto; }  /* ou simplesmente delete essa regra */
+
+/* container “empilhado” da esquerda */
+.stack-panel{
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+.stack-panel .section-title{
+  font-weight: 700;
+  color: var(--accent);
+  margin: 6px 0 4px;
+}
+.chip.small{
+  font-size: 11px;
+  padding: 2px 6px;
+  margin-left: 6px;
+  opacity: .95;
+}
