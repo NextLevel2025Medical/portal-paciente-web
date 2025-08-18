@@ -1004,4 +1004,61 @@ html, body { overflow-x: hidden; }
   }
 }
 
+/* === 1) Propostas – valor da direita nunca vaza do card === */
+.stack-panel .panel .sub + .kpi{
+  font-size: clamp(18px, 4.8vw, 26px); /* encolhe no celular */
+  white-space: nowrap;
+  text-align: right;
+  line-height: 1.1;
+}
+
+/* === 2) Possibilidades Adicionais — tipografia e alinhamento no mobile === */
+@media (max-width: 480px){
+  /* cabeçalho: títulos menores e com quebra */
+  .stack-panel .table th{
+    font-size: 12px;
+    line-height: 1.15;
+    white-space: normal;
+  }
+  /* valores mais compactos para caber em 1 linha */
+  .stack-panel .table td.col-red,
+  .stack-panel .table td.col-green{
+    font-size: 12.5px;
+    white-space: nowrap;
+  }
+  /* nome do serviço ainda confortável */
+  .stack-panel .table td:first-child{
+    font-size: 14px;
+  }
+}
+
+/* garante que header e corpo fiquem travados nas mesmas larguras (usa a classe que você adicionou no header) */
+.allow-overflow{ display:block; width:calc(100% - 16px); box-sizing:border-box; }
+.allow-overflow th, .allow-overflow + div .table td{ padding-left:12px; padding-right:12px; box-sizing:border-box; }
+/* larguras proporcionais (ajuste fino) */
+.allow-overflow th:first-child, .allow-overflow + div .table td:first-child{ width:53%; }
+.allow-overflow th.col-red,   .allow-overflow + div .table td.col-red{   width:18%; white-space:nowrap; }
+.allow-overflow th.col-green, .allow-overflow + div .table td.col-green{ width:18%; white-space:nowrap; }
+.allow-overflow th.col-action,.allow-overflow + div .table td.col-action{ width:11%; min-width:120px; text-align:center; white-space:nowrap; }
+
+/* === 3) Evolução dos Pagamentos — cabe com folga no celular === */
+@media (max-width: 480px){
+  /* “Forma” um pouco maior, “Valor a Pagar” menor e sem quebra */
+  .grid-2 .panel .table thead th:nth-child(3){ font-size: 13px; }     /* Forma */
+  .grid-2 .panel .table thead th:nth-child(5){ font-size: 12px; }     /* Valor a Pagar */
+  .grid-2 .panel .table td:nth-child(5){ font-size: 12.5px; white-space: nowrap; }
+
+  /* data curta já vem do fmtData; evita quebra da data e do valor */
+  .grid-2 .panel .table td:nth-child(1),
+  .grid-2 .panel .table td:nth-child(2){ white-space: nowrap; }
+}
+
+/* === 4) Margens laterais menores (ganhar espaço útil) === */
+.container{ max-width: min(100vw, 1600px); padding-inline: 10px; }  /* layout global */
+@media (min-width: 1200px){
+  .container{ max-width: min(96vw, 1600px); }                       /* mantém conforto no desktop */
+}
+
+/* segurança: itens de grid não estouram */
+.grid-2 > * { min-width: 0; }
 
