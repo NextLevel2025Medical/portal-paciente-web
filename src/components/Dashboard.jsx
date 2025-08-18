@@ -6,7 +6,7 @@ import nextDynamic from 'next/dynamic';
 import Image from 'next/image';
 
 // Viewer (client-only)
-const Viewer = nextDynamic(() => import('../visualizador/Viewer'), { ssr: false });
+const Viewer = nextDynamic(() => import('../../app/visualizador/Viewer'), { ssr: false });
 
 // ====== ENV / CONSTANTES ======
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE; // <— defina no Render
