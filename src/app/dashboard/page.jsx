@@ -145,6 +145,8 @@ const toggleOferta = (idx) => {
   );
 };
 
+const WHATS_NUMBER = process.env.NEXT_PUBLIC_WHATS_NUMBER || '55SEUNUMERO'
+
 const contratarSelecionadas = () => {
   if (!ofertasSelecionadas.length) return;
 
@@ -265,7 +267,6 @@ const linhas = useMemo(()=>{
 
   const waLink = "https://wa.me/55SEUNUMERO?text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20minha%20cirurgia."
 
-  const WHATS_NUMBER = '55SEUNUMERO' // ex: 5511999999999
   const contratarAgora = (o) => {
     const msg = encodeURIComponent(`Olá! Quero contratar "${o.nome}" no momento cirúrgico por ${fmtBRL(o.momento)}.`)
     window.open(`https://wa.me/${WHATS_NUMBER}?text=${msg}`, '_blank')
@@ -607,6 +608,8 @@ const getApptMeta = (a) => {
         }
       `}</style>
     </div>
+      )
+    }
     export default function Dashboard() {
       return (
         <Suspense fallback={null}>
@@ -616,5 +619,4 @@ const getApptMeta = (a) => {
     }
 
     export const dynamic = 'force-dynamic';
-  )
-}
+
