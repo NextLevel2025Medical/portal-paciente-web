@@ -426,7 +426,7 @@ export default function Dashboard() {
             <div className="panel" style={{ marginBottom: 0 }}>
               {allSuggs.length ? (
                 <>
-                  <table className="table compact" style={{ tableLayout: 'fixed', width: '100%' }}>
+                  <table className="table compact allow-overflow" style={{ tableLayout: 'fixed', width: '100%' }}>
                     <thead>
                       <tr>
                         <th className="col-service">Serviço</th>
@@ -626,7 +626,7 @@ export default function Dashboard() {
 
       {/* estilos mínimos locais (você já tinha) */}
       <style jsx>{`
-        .wrap { width: min(96vw, 1500px); margin: 0 auto; padding: 0 16px; }
+        .wrap { width: min(100vw, 1500px); margin: 0 auto; padding: 0 10px; }
         .card-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; margin-bottom: 18px; }
         .left-col { display: grid; gap: 14px; }
         .viewer-panel .viewer-inner { width: 100%; height: 560px; display: grid; place-items: center; }
