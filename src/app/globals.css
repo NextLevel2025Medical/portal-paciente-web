@@ -706,84 +706,12 @@ html, body { overflow-x: hidden; }
   padding-left: 6px;
   padding-right: 6px;
 }
-/* ===== Possibilidades Adicionais — alinhamento e larguras finais ===== */
-
-/* 0) Header precisa “reservar” o espaço do scrollbar do corpo */
-.allow-overflow{
-  display:block;                /* permite aplicar largura/padding no <table> do header */
-  width: calc(100% - 16px);     /* ajuste fino: 14–16px conforme a largura do seu scrollbar */
-  box-sizing: border-box;
-}
-
-/* 1) Distribuição de colunas (header + corpo) — sem renomear classes */
-.allow-overflow th:first-child,
-.allow-overflow + div .table td:first-child{
-  /* Serviço (reduzido para abrir espaço ao 'Selecionar') */
-  width: 53%;
-}
-
-.allow-overflow th.col-red,
-.allow-overflow + div .table td.col-red{
-  /* Valor avulso */
-  width: 18%;
-  white-space: nowrap;
-}
-
-.allow-overflow th.col-green,
-.allow-overflow + div .table td.col-green{
-  /* No dia da sua cirurgia — mesma largura do avulso */
-  width: 18%;
-  white-space: nowrap;
-}
-
-.allow-overflow th.col-action,
-.allow-overflow + div .table td.col-action{
-  /* Selecionar — mais largo e com mínimo para caber o título */
-  width: 11%;
-  min-width: 120px;             /* ↑ garante que “Selecionar” não saia da tabela */
-  text-align: center;
-  padding-left: 6px;
-  padding-right: 6px;
-  box-sizing: border-box;
-  white-space: nowrap;
-}
-
-/* 2) (opcional) se ainda notar 1–2px de desencontro, tente subir para 16px: 
-   .allow-overflow{ width: calc(100% - 16px); } */
-/* ===== Correção de alinhamento header x corpo (Possibilidades Adicionais) ===== */
 
 /* Força o cabeçalho a ter a mesma largura interna que o corpo */
 .allow-overflow {
   border-spacing: 0;
   padding-left: 0;   /* remove recuo extra à esquerda */
   padding-right: 0;  /* remove recuo extra à direita */
-}
-
-/* Alinha o conteúdo das células do header com o corpo */
-.allow-overflow th,
-.allow-overflow + div .table td {
-  padding-left: 12px;   /* mesmo padding à esquerda */
-  padding-right: 12px;  /* mesmo padding à direita */
-  box-sizing: border-box;
-}
-
-/* Mantém as larguras proporcionais */
-.allow-overflow th:first-child,
-.allow-overflow + div .table td:first-child {
-  width: 36%;
-}
-.allow-overflow th.col-red,
-.allow-overflow + div .table td.col-red {
-  width: 16%;
-}
-.allow-overflow th.col-green,
-.allow-overflow + div .table td.col-green {
-  width: 17%;
-}
-.allow-overflow th.col-action,
-.allow-overflow + div .table td.col-action {
-  width: 10%;
-  text-align: center;
 }
 
 /* ====================== MOBILE OVERRIDES (até 980px) ====================== */
@@ -804,7 +732,6 @@ html, body { overflow-x: hidden; }
 
 /* 4) Espaçamentos e alturas mais amigáveis no celular (opcional, ajusta sem afetar desktop) */
 @media (max-width: 980px){
-  .wrap { width: min(94vw, 1500px); padding: 0 16px; }
   .viewer-box { height: 380px; min-height: 320px; }  /* ajuste de altura do 3D no mobile */
   h1, .patient-name { font-size: clamp(18px, 5vw, 28px); line-height: 1.2; }
 }
@@ -1023,15 +950,6 @@ html, body { overflow-x: hidden; }
   }
 }
 
-/* garante que header e corpo fiquem travados nas mesmas larguras (usa a classe que você adicionou no header) */
-.allow-overflow{ display:block; width:calc(100% - 16px); box-sizing:border-box; }
-.allow-overflow th, .allow-overflow + div .table td{ padding-left:12px; padding-right:12px; box-sizing:border-box; }
-/* larguras proporcionais (ajuste fino) */
-.allow-overflow th:first-child, .allow-overflow + div .table td:first-child{ width:53%; }
-.allow-overflow th.col-red,   .allow-overflow + div .table td.col-red{   width:18%; white-space:nowrap; }
-.allow-overflow th.col-green, .allow-overflow + div .table td.col-green{ width:18%; white-space:nowrap; }
-.allow-overflow th.col-action,.allow-overflow + div .table td.col-action{ width:11%; min-width:120px; text-align:center; white-space:nowrap; }
-
 /* === 3) Evolução dos Pagamentos — cabe com folga no celular === */
 @media (max-width: 480px){
   /* “Forma” um pouco maior, “Valor a Pagar” menor e sem quebra */
@@ -1098,3 +1016,32 @@ html, body { overflow-x: hidden; }
 /* segurança: nada passa da largura do container */
 .wrap, .panel, .panel > * { max-width: 100%; }
 html, body, .container, .wrap { overflow-x: clip; }  /* clipa qualquer sobra de 1-2px do iOS */
+/* ===== largura segura de container e wrap ===== */
+*,*::before,*::after{ box-sizing: border-box; }
+
+.container{
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding-inline: 10px;
+}
+
+.wrap{
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding-inline: 10px;
+}
+
+/* no mobile não use vw; só diminua o padding */
+@media (max-width: 980px){
+  .container, .wrap { padding-inline: 8px; }
+}
+
+/* nada ultrapassa o container, mesmo que um filho gere 1–2px extras */
+.wrap, .panel, .panel > *, .table { max-width: 100%; }
+html, body, .container, .wrap { overflow-x: clip; }
+@media (max-width: 480px){
+  .addons-scroll{ overflow-y: auto; }
+  .addons-head, .addons-body{ table-layout: fixed; width: 100%; }
+}
