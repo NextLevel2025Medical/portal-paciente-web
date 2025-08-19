@@ -53,10 +53,12 @@ const F_MAP = {
 };
 const fmtForma = (v) => F_MAP[Number(v)] || String(v ?? '');
 
-const abrirWhats = useCallback((motivo) => {
+const abrirWhats = (phone, motivo) => {
   const msg = encodeURIComponent(`Olá! Quero realizar um novo pagamento (${motivo}).`);
-  window.open(`https://wa.me/${sellerPhone}?text=${msg}`, '_blank');
-}, [sellerPhone]);
+  if (typeof window !== 'undefined') {
+    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+  }
+};
 
 const copiarPix = async () => {
   try {
@@ -637,7 +639,7 @@ export default function Dashboard() {
             <h3 style={{ marginTop: 0 }}>Realizar novo pagamento</h3>
 
             <div className="modal-options">
-              <button className="btn-choice" onClick={() => abrirWhats('Dinheiro')}>
+              <button className="btn-choice" onClick={() => abrirWhats(sellerPhone,'Dinheiro')}>
                 Dinheiro
               </button>
               <button className="btn-choice" onClick={() => setShowPix(true)}>Pix</button>
