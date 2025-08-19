@@ -416,7 +416,8 @@ function buildSpheresFromRegions(bbox, keys) {
 // Material com shader que mistura base + destaque dentro das esferas
 // e "corta" por normais frontais para evitar pegar ombro/pescoço.
 function createMaskedMaterial(baseColor = "#6b7280", highlightColor = "#e7c268") {
-  const mat = new THREE.MeshStandardMaterial({ color: baseColor, roughness: 0.9, metalness: 0.0 });
+  const mat = new THREE.MeshStandardMaterial({ color: baseColor, roughness: 0.95, metalness: 0.0 });
+  mat.dithering = true;
 
   mat.onBeforeCompile = (shader) => {
     shader.uniforms.uBaseColor = { value: new THREE.Color(baseColor) };
@@ -471,7 +472,9 @@ function createMaskedMaterial(baseColor = "#6b7280", highlightColor = "#e7c268")
           highlight = max(highlight, w * faceDir);
         }
 
-        diffuseColor.rgb = mix(uBaseColor, uHighlightColor, clamp(highlight, 0.0, 1.0));
+        + float amt = pow(clamp(highlight, 0.0, 1.0), 1.3);   // comprime meios-tons
+      vec3 tint = mix(uBaseColor, uHighlightColor, 0.45); // puxa só 45% para o destaque
+      diffuseColor.rgb = mix(uBaseColor, tint, amt);      // resultado: mais sutil e limpo
       `
     );
 
@@ -482,7 +485,7 @@ function createMaskedMaterial(baseColor = "#6b7280", highlightColor = "#e7c268")
   return mat;
 }
 
-function Human({ selecionados = [], color = "#e7c268" }) {
+function Human({ selecionados = [], color = "#e2b857" }) {
   const totalMatsRef   = useRef(0);
   const readyMatsRef   = useRef(0);
   const pendingUniformsRef = useRef(false);
@@ -493,7 +496,7 @@ function Human({ selecionados = [], color = "#e7c268" }) {
   });
   mark('gltf-loaded');
   const materials = useRef([]);
-  const baseColor = "#FFFF"; // cinza base
+  const baseColor = "#c7cad1"; // cinza base
   const DEBUG = false; // mude para true para ver as esferas
 
   
