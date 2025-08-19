@@ -1098,3 +1098,7 @@ html, body, .container, .wrap { overflow-x: clip; }
   .header .logout{ display: none !important; }   /* some do topo no mobile */
   .logout-footer{ display: inline-flex; }        /* aparece no final */
 }
+/* Desktop: afasta o SAIR 5px da borda direita */
+@media (min-width: 981px){
+  .header .logout{ margin-right: 5px; }
+}
