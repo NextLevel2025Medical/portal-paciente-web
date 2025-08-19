@@ -689,8 +689,4 @@ export default function Dashboard() {
     </div>
   );
 }
-/* Desktop: afasta o SAIR 5px da borda direita */
-@media (min-width: 981px){
-  .header .logout{ margin-right: 5px; }
-}
 
