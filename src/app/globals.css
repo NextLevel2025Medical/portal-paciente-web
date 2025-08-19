@@ -928,10 +928,10 @@ html, body { overflow-x: hidden; }
 }
 @media (max-width: 480px){
   :root{
-    --addons-w-service: 52%;
-    --addons-w-red: 22%;
-    --addons-w-green: 22%;
-    --addons-w-action: 12%;
+    --addons-w-service: 30%;
+    --addons-w-red: 30%;
+    --addons-w-green: 30%;
+    --addons-w-action: 10%;
   }
 }
 
@@ -1052,4 +1052,8 @@ html, body, .container, .wrap { overflow-x: clip; }
 /* Desktop: mantém 5 colunas e esconde a linha mobile */
 @media (min-width: 641px){
   .pay-table tfoot tr.sum-mobile{ display:none; }
+}
+/* Mobile: arrastar para BAIXO rola a página (não gira o 3D) */
+@media (max-width: 980px){
+  .viewer-inner canvas{ touch-action: pan-y !important; }
 }
