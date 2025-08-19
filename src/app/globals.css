@@ -694,10 +694,10 @@ html, body { overflow-x: hidden; }
 }
 
 /* 2) Largura das colunas (mantendo seus nomes) */
-.stack-panel .table th.col-service, .stack-panel .table td.col-service { width: 40%; }
-.stack-panel .table th.col-red,     .stack-panel .table td.col-red     { width: 22%; }
-.stack-panel .table th.col-green,   .stack-panel .table td.col-green   { width: 22%; }
-.stack-panel .table th.col-action,  .stack-panel .table td.col-action  { width: 16%; }
+.stack-panel .table th.col-service, .stack-panel .table td.col-service { width: 45%; }
+.stack-panel .table th.col-red,     .stack-panel .table td.col-red     { width: 20%; }
+.stack-panel .table th.col-green,   .stack-panel .table td.col-green   { width: 20%; }
+.stack-panel .table th.col-action,  .stack-panel .table td.col-action  { width: 15%; }
 
 /* 3) Coluna “Selecionar” bem justa e centralizada */
 .stack-panel .table th.col-action,
@@ -805,10 +805,10 @@ html, body { overflow-x: hidden; }
    (a sua lista usa duas <table>: cabeçalho e corpo dentro de um <div> rolável) */
 @media (max-width: 980px){
   /* larguras mais folgadas para os números */
-  .stack-panel .table th.col-service, .stack-panel .table td.col-service { width: 36%; }
-  .stack-panel .table th.col-red,     .stack-panel .table td.col-red     { width: 25; }
-  .stack-panel .table th.col-green,   .stack-panel .table td.col-green   { width: 25%; }
-  .stack-panel .table th.col-action,  .stack-panel .table td.col-action  { width: 14%; min-width: 44px; text-align:center; }
+  .stack-panel .table th.col-service, .stack-panel .table td.col-service { width: 44%; }
+  .stack-panel .table th.col-red,     .stack-panel .table td.col-red     { width: 22%; }
+  .stack-panel .table th.col-green,   .stack-panel .table td.col-green   { width: 22%; }
+  .stack-panel .table th.col-action,  .stack-panel .table td.col-action  { width: 12%; min-width: 44px; text-align:center; }
 
   /* números: não cortar + tamanho menor */
   .stack-panel .table td.col-red,
@@ -1056,4 +1056,28 @@ html, body, .container, .wrap { overflow-x: clip; }
 /* Mobile: arrastar para BAIXO rola a página (não gira o 3D) */
 @media (max-width: 980px){
   .viewer-inner canvas{ touch-action: pan-y !important; }
+}
+/* ===== Possibilidades: mostrar "R$" em cima e o valor embaixo (só no mobile) ===== */
+.price-stack { display: inline; } /* desktop continua em linha */
+
+@media (max-width: 480px){
+  /* permitir quebra dentro das células de preço no mobile */
+  .addons-body td.col-red,
+  .addons-body td.col-green{ white-space: normal; }
+
+  .price-stack{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.05;
+  }
+  .price-stack .curr{
+    font-size: 11px;
+    opacity: .9;
+    margin-bottom: 2px;
+  }
+  .price-stack .amt{
+    font-weight: 600;
+    white-space: nowrap; /* o número não “picota” */
+  }
 }
