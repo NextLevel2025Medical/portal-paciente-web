@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import nextDynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -53,10 +53,10 @@ const F_MAP = {
 };
 const fmtForma = (v) => F_MAP[Number(v)] || String(v ?? '');
 
-const abrirWhats = (motivo) => {
+const abrirWhats = useCallback((motivo) => {
   const msg = encodeURIComponent(`Olá! Quero realizar um novo pagamento (${motivo}).`);
   window.open(`https://wa.me/${sellerPhone}?text=${msg}`, '_blank');
-};
+}, [sellerPhone]);
 
 const copiarPix = async () => {
   try {
