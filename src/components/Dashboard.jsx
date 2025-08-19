@@ -14,6 +14,12 @@ const SUPPORT_WHATS = process.env.NEXT_PUBLIC_SUPPORT_WHATS || '55SEUNUMERO';
 const PIX_KEY = process.env.NEXT_PUBLIC_PIX_KEY || 'financeiro@drgustavoaquino.com.br';
 const WHATS_NUMBER = process.env.NEXT_PUBLIC_WHATS_NUMBER || SUPPORT_WHATS;
 
+const SELLER_WA = {
+  'Johnny':   '5531985252115',
+  'Ana Maria':'553172631346',
+  'Carolina': '553195426283',
+};
+
 // ====== FUNÇÕES UTILITÁRIAS / MAPS (vêm do topo do seu arquivo) ======
 const fmtBRL = (v) =>
   new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v);
@@ -49,7 +55,7 @@ const fmtForma = (v) => F_MAP[Number(v)] || String(v ?? '');
 
 const abrirWhats = (motivo) => {
   const msg = encodeURIComponent(`Olá! Quero realizar um novo pagamento (${motivo}).`);
-  window.open(`https://wa.me/${SUPPORT_WHATS}?text=${msg}`, '_blank');
+  window.open(`https://wa.me/${sellerPhone}?text=${msg}`, '_blank');
 };
 
 const copiarPix = async () => {
@@ -171,6 +177,8 @@ export default function Dashboard() {
   const name = decodeURIComponent(sp.get('name') || 'Paciente ');
   const cpf = sp.get('cpf');
   const invoiceIdQS = sp.get('invoice_id') || '';
+  const vendedor = sp.get('vendedor') || '';
+  const sellerPhone = SELLER_WA[vendedor] || WHATS_NUMBER; // fallback se vier vazio/desconhecido
 
   const [data, setData] = useState(null);
   const [err, setErr] = useState('');
@@ -196,7 +204,7 @@ export default function Dashboard() {
     const msg = encodeURIComponent(
       `Olá! Gostaria de contratar agora:%0A${texto}%0A%0ATotal: ${fmtBRL(total)}`,
     );
-    window.open(`https://wa.me/${WHATS_NUMBER}?text=${msg}`, '_blank');
+    window.open(`https://wa.me/${sellerPhone}?text=${msg}`, '_blank');
   };
 
   // ====== FETCH ======
@@ -307,8 +315,10 @@ export default function Dashboard() {
   if (err) return <p style={{ color: '#ef4444' }}>{err}</p>;
   if (!data) return <p>Carregando…</p>;
 
-  const waLink =
-    'https://wa.me/55SEUNUMERO?text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20minha%20cirurgia.';
+  const waLink = useMemo(() => {
+    const msg = `Olá, eu me chamo ${name} e tenho uma dúvida sobre a minha cirurgia.`;
+    return `https://wa.me/${sellerPhone}?text=${encodeURIComponent(msg)}`;
+  }, [name, sellerPhone]);
 
   // ====== JSX ======
   return (
