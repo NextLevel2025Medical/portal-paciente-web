@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { useEffect, useMemo, useRef } from "react";
+import { OrbitControls } from '@react-three/drei';
 
 const DEBUG =
   (typeof window !== 'undefined' && (new URLSearchParams(window.location.search).get('debug') === '1')) ||
@@ -652,7 +653,10 @@ export default function Viewer({ selecionados = [], autoRotate = true }) {
       <directionalLight position={[5, 10, 5]} intensity={0.9} castShadow />
       <Human selecionados={selecionados} />
       <OrbitControls
+        enableZoom={false}
         enablePan={false}
+        minPolarAngle={Math.PI / 2}
+        maxPolarAngle={Math.PI / 2}
         minDistance={2.0}
         maxDistance={6}
         autoRotate={autoRotate}
