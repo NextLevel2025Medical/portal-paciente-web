@@ -506,41 +506,45 @@ export default function Dashboard() {
         <div>
           <div className="block-title">EVOLUÇÃO DOS PAGAMENTOS</div>
           <div className="panel">
-            <table className="table compact">
-              <thead>
+            <div className="table-wrap pay">
+            <table className="table compact pay-table">
+                <colgroup>
+                <col className="col-data" />
+                <col className="col-valor" />
+                <col className="col-forma" />
+                <col className="col-acum" />
+                <col className="col-saldo" />
+                </colgroup>
+                <thead>
                 <tr>
-                  <th>Data</th>
-                  <th>Valor</th>
-                  <th>Forma</th>
-                  <th>Acumulado</th>
-                  <th>Valor a Pagar</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                    <th>Forma</th>
+                    <th>Acumulado</th>
+                    <th>Valor a Pagar</th>
                 </tr>
-              </thead>
-              <tbody>
+                </thead>
+                <tbody>
                 {linhas.rows.map((p, i) => (
-                  <tr key={i}>
+                    <tr key={i}>
                     <td>{p.data}</td>
                     <td>{p.valor}</td>
                     <td>{p.forma}</td>
                     <td>{p.acumulado}</td>
                     <td>{p.saldoApos}</td>
-                  </tr>
+                    </tr>
                 ))}
-              </tbody>
-              <tfoot>
+                </tbody>
+                <tfoot>
                 <tr>
-                  <td colSpan={3}>
-                    <b>Total Pago</b>
-                  </td>
-                  <td>
-                    <b>{fmtBRL(data.financeiro.pago)}</b>
-                  </td>
-                  <td>
-                    <b>{fmtBRL(data.financeiro.saldo)}</b>
-                  </td>
+                    <td colSpan={3}><b>Total Pago</b></td>
+                    <td><b>{fmtBRL(data.financeiro.pago)}</b></td>
+                    <td><b>{fmtBRL(data.financeiro.saldo)}</b></td>
                 </tr>
-              </tfoot>
+                </tfoot>
             </table>
+            </div>
+
 
             <div className="pay-actions">
               <button
