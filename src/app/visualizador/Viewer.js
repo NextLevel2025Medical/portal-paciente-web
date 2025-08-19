@@ -472,9 +472,9 @@ function createMaskedMaterial(baseColor = "#6b7280", highlightColor = "#e7c268")
           highlight = max(highlight, w * faceDir);
         }
 
-        + float amt = pow(clamp(highlight, 0.0, 1.0), 1.3);   // comprime meios-tons
-      vec3 tint = mix(uBaseColor, uHighlightColor, 0.45); // puxa só 45% para o destaque
-      diffuseColor.rgb = mix(uBaseColor, tint, amt);      // resultado: mais sutil e limpo
+          float amt = pow(clamp(highlight, 0.0, 1.0), 1.3);   // comprime meios-tons
+          vec3 tint = mix(uBaseColor, uHighlightColor, 0.45); // puxa só 45% para o destaque
+          diffuseColor.rgb = mix(uBaseColor, tint, amt);      // resultado: mais sutil e limpo
       `
     );
 
