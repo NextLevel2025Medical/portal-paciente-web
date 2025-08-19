@@ -26,6 +26,7 @@ html, body { overflow-x: hidden; }
   --warn:#f5a524;
   --danger:#ef4444;
   --border:#2a3142;
+  --info: #60A5FA; /* Azul para o KPI "Total" */
 }
 
 *{box-sizing:border-box}
