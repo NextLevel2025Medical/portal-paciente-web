@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import nextDynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -15,9 +15,9 @@ const PIX_KEY = process.env.NEXT_PUBLIC_PIX_KEY || 'financeiro@drgustavoaquino.c
 const WHATS_NUMBER = process.env.NEXT_PUBLIC_WHATS_NUMBER || SUPPORT_WHATS;
 
 const SELLER_WA = {
-  Johnny: "5531985252115",
-  "Ana Maria": "553172631346",
-  Carolina: "553195426283",
+  Johnny: '5531985252115',
+  'Ana Maria': '553172631346',
+  Carolina: '553195426283',
 };
 
 // ====== FUNÇÕES UTILITÁRIAS / MAPS (vêm do topo do seu arquivo) ======
@@ -171,13 +171,13 @@ export default function Dashboard() {
   const name = decodeURIComponent(sp.get('name') || 'Paciente ');
   const cpf = sp.get('cpf');
   const invoiceIdQS = sp.get('invoice_id') || '';
-  const vendedor = sp.get("vendedor") || "";
-  const sellerPhone = SELLER_WA[vendedor] || WHATS_NUMBER; // fallback se vier vazio/desconhecido
+  const vendedor = sp.get('vendedor') || '';
+  const sellerPhone = SELLER_WA[vendedor] || WHATS_NUMBER;
 
   const abrirWhats = useCallback((motivo) => {
     const msg = `Olá! Quero realizar um novo pagamento (${motivo}).`;
-    if (typeof window !== "undefined" && sellerPhone) {
-      window.open(`https://wa.me/${sellerPhone}?text=${encodeURIComponent(msg)}`, "_blank");
+    if (typeof window !== 'undefined' && sellerPhone) {
+      window.open(`https://wa.me/${sellerPhone}?text=${encodeURIComponent(msg)}`, '_blank');
     }
   }, [sellerPhone]);
 
@@ -316,13 +316,11 @@ export default function Dashboard() {
   if (err) return <p style={{ color: '#ef4444' }}>{err}</p>;
   if (!data) return <p>Carregando…</p>;
 
-  const waLink = useMemo(() => {
-    const msg = `Olá, eu me chamo ${name} e tenho uma dúvida sobre a minha cirurgia.`;
-    return sellerPhone
-      ? `https://wa.me/${sellerPhone}?text=${encodeURIComponent(msg)}`
-      : "#";
-  }, [name, sellerPhone]);
-  
+  const waMsg = `Olá, eu me chamo ${name} e tenho uma dúvida sobre a minha cirurgia.`;
+  const waLink = sellerPhone
+    ? `https://wa.me/${sellerPhone}?text=${encodeURIComponent(waMsg)}`
+    : '#';
+
   // ====== JSX ======
   return (
     <div className="wrap">
@@ -640,7 +638,7 @@ export default function Dashboard() {
             <h3 style={{ marginTop: 0 }}>Realizar novo pagamento</h3>
 
             <div className="modal-options">
-              <button className="btn-choice" onClick={() => abrirWhats(sellerPhone,'Dinheiro')}>
+              <button className="btn-choice" onClick={() => abrirWhats('Dinheiro')}>
                 Dinheiro
               </button>
               <button className="btn-choice" onClick={() => setShowPix(true)}>Pix</button>
