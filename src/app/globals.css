@@ -582,7 +582,6 @@ html, body { overflow-x: hidden; }
 @media (max-width: 980px){
   .viewer-box { height: 420px; }
 }
-
 /* faz as duas colunas esticarem igualmente na vertical */
 .grid-1{ 
   display:grid;
@@ -849,7 +848,6 @@ html, body { overflow-x: hidden; }
 @media (max-width: 980px){
   .viewer-inner, .viewer-box { height: 380px; min-height: 320px; }
 }
-
 /* ====================== TYPOGRAFIA – AJUSTES MOBILE ====================== */
 
 /* Valores grandes (R$ …) */
@@ -1003,7 +1001,6 @@ html, body { overflow-x: hidden; }
     overflow: visible;
   }
 }
-
 /* === 1) Propostas – valor da direita nunca vaza do card === */
 .stack-panel .panel .sub + .kpi{
   font-size: clamp(18px, 4.8vw, 26px); /* encolhe no celular */
@@ -1053,14 +1050,47 @@ html, body { overflow-x: hidden; }
   .grid-2 .panel .table td:nth-child(2){ white-space: nowrap; }
 }
 
-/* === 4) Margens laterais menores (ganhar espaço útil) === */
-.container{ max-width: min(100vw, 1600px); padding-inline: 10px; }  /* layout global */
-@media (min-width: 1200px){
-  .container{ max-width: min(96vw, 1600px); }                       /* mantém conforto no desktop */
-}
-
 /* segurança: itens de grid não estouram */
 .grid-2 > * { min-width: 0; }
+/* ===== Possibilidades Adicionais: alinhamento de colunas ===== */
+:root{
+  --addons-w-service: 50%;
+  --addons-w-red: 20%;
+  --addons-w-green: 20%;
+  --addons-w-action: 10%;
+}
+@media (max-width: 480px){
+  :root{
+    --addons-w-service: 52%;
+    --addons-w-red: 22%;
+    --addons-w-green: 22%;
+    --addons-w-action: 12%;
+  }
+}
+
+/* Mesma largura nas duas tabelas */
+.addons-head, .addons-body{ table-layout: fixed; width: 100%; border-collapse: separate; border-spacing: 0; }
+.addons-head col.col-service, .addons-body col.col-service{ width: var(--addons-w-service); }
+.addons-head col.col-red,     .addons-body col.col-red    { width: var(--addons-w-red); }
+.addons-head col.col-green,   .addons-body col.col-green  { width: var(--addons-w-green); }
+.addons-head col.col-action,  .addons-body col.col-action { width: var(--addons-w-action); }
+
+/* Padding/box-sizing idênticos para não “sambar” 1px */
+.addons-head th, .addons-body td{ padding: 10px 12px; box-sizing: border-box; }
+
+/* Números em 1 linha; títulos podem quebrar */
+.addons-body td.col-red, .addons-body td.col-green{ white-space: nowrap; }
+.addons-head th{ white-space: normal; line-height: 1.2; }
+
+/* Mobile: fontes mais compactas e header legível */
+@media (max-width: 480px){
+  .addons-head th{ font-size: 12px; }
+  .addons-body td.col-red, .addons-body td.col-green{ font-size: 12px; }
+  .addons-body td:first-child{ font-size: 14px; } /* nome do serviço */
+}
+
+/* Segurança: remova qualquer largura custom do hack anterior */
+.allow-overflow{ width: 100% !important; }
 
 /* ===== Correção de box-model + largura do container ===== */
 *, *::before, *::after { box-sizing: border-box; }   /* evita width+padding > viewport */
