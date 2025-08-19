@@ -626,8 +626,6 @@ html, body { overflow-x: hidden; }
   height:100%;
   display:grid;
 }
-/* (se existir) remova altura fixa antiga */
-.viewer-box > div{ height:auto; }  /* ou simplesmente delete essa regra */
 
 /* container “empilhado” da esquerda */
 .stack-panel{
