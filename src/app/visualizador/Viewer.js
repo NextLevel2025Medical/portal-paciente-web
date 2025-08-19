@@ -653,7 +653,7 @@ export default function Viewer({ selecionados = [], autoRotate = true }) {
       <color attach="background" args={["#0b0f16"]} />
       <ambientLight intensity={0.6} />
       <directionalLight position={[5, 10, 5]} intensity={0.9} castShadow />
-      <Human selecionados={selecionados} />
+      <Human selecionados={selecionados} color="#5cbfb1"/>
       <OrbitControls
         enableZoom={false}
         enablePan={false}
