@@ -459,8 +459,29 @@ export default function Dashboard() {
                                 {o._region && <span className="chip small">{o._region}</span>}
                                 </span>
                             </td>
-                            <td className="col-red">{fmtBRL(o.avulso)}</td>
-                            <td className="col-green">{fmtBRL(o.momento)}</td>
+                            <td className="col-red">
+                            {(() => {
+                                const m = (fmtBRL(o.avulso) || '').match(/^([^\d]+)\s*(.+)$/);
+                                return (
+                                <span className="price-stack">
+                                    <span className="curr">{m?.[1] ?? 'R$'}</span>
+                                    <span className="amt">{m?.[2] ?? fmtBRL(o.avulso)}</span>
+                                </span>
+                                );
+                            })()}
+                            </td>
+
+                            <td className="col-green">
+                            {(() => {
+                                const m = (fmtBRL(o.momento) || '').match(/^([^\d]+)\s*(.+)$/);
+                                return (
+                                <span className="price-stack">
+                                    <span className="curr">{m?.[1] ?? 'R$'}</span>
+                                    <span className="amt">{m?.[2] ?? fmtBRL(o.momento)}</span>
+                                </span>
+                                );
+                            })()}
+                            </td>
                             <td className="col-action">
                                 <input
                                 type="checkbox"
