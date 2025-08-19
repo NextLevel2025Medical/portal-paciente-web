@@ -536,8 +536,16 @@ export default function Dashboard() {
                 ))}
                 </tbody>
                 <tfoot>
-                <tr>
+                {/* Desktop: 5 colunas */}
+                <tr className="sum-desktop">
                     <td colSpan={3}><b>Total Pago</b></td>
+                    <td><b>{fmtBRL(data.financeiro.pago)}</b></td>
+                    <td><b>{fmtBRL(data.financeiro.saldo)}</b></td>
+                </tr>
+
+                {/* Mobile: 3 colunas (Data, Valor, Valor a Pagar) */}
+                <tr className="sum-mobile">
+                    <td><b>Total Pago</b></td>
                     <td><b>{fmtBRL(data.financeiro.pago)}</b></td>
                     <td><b>{fmtBRL(data.financeiro.saldo)}</b></td>
                 </tr>
