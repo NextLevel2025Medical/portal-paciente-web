@@ -694,10 +694,10 @@ html, body { overflow-x: hidden; }
 }
 
 /* 2) Largura das colunas (mantendo seus nomes) */
-.stack-panel .table th.col-service, .stack-panel .table td.col-service { width: 45%; }
-.stack-panel .table th.col-red,     .stack-panel .table td.col-red     { width: 20%; }
-.stack-panel .table th.col-green,   .stack-panel .table td.col-green   { width: 20%; }
-.stack-panel .table th.col-action,  .stack-panel .table td.col-action  { width: 15%; }
+.stack-panel .table th.col-service, .stack-panel .table td.col-service { width: 40%; }
+.stack-panel .table th.col-red,     .stack-panel .table td.col-red     { width: 22%; }
+.stack-panel .table th.col-green,   .stack-panel .table td.col-green   { width: 22%; }
+.stack-panel .table th.col-action,  .stack-panel .table td.col-action  { width: 16%; }
 
 /* 3) Coluna “Selecionar” bem justa e centralizada */
 .stack-panel .table th.col-action,
