@@ -36,7 +36,12 @@ export default function LoginPage(){
       }
       const j = await r.json()
       // TODO: salvar token se necessário
-      router.push(`/dashboard?patient_id=${encodeURIComponent(j.patient_id)}&name=${encodeURIComponent(j.name)}&cpf=${encodeURIComponent(j.cpf)}`);
+      router.push(
+        `/dashboard?patient_id=${encodeURIComponent(j.patient_id)}` +
+        `&name=${encodeURIComponent(j.name)}` +
+        `&cpf=${encodeURIComponent(j.cpf)}` +
+        `&vendedor=${encodeURIComponent(j.vendedor || '')}`
+      );
     }catch(e){
       setErr(e.message || 'Não foi possível entrar')
     }finally{
