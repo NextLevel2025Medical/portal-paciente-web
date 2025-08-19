@@ -668,6 +668,14 @@ export default function Dashboard() {
         </svg>
       </a>
 
+      {/* SAIR (somente mobile, no fim da página) */}
+      <a
+      className="link logout logout-footer"
+      onClick={() => router.push('/login')}
+      >
+      <img src="/EXIT.png" alt="" className="logout-ico" width="150" height="150" />
+      SAIR
+      </a>
       {/* estilos mínimos locais (você já tinha) */}
       <style jsx>{`
         .wrap { width: 100%; max-width: 1500px; margin: 0 auto; padding: 0 10px; box-sizing: border-box; }
