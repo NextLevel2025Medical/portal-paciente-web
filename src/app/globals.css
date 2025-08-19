@@ -1029,3 +1029,27 @@ html, body, .container, .wrap { overflow-x: clip; }
   .pay-table col.col-acum  { width: 20%; }
   .pay-table col.col-saldo { width: 20%; }
 }
+/* ===== EVOLUÇÃO DOS PAGAMENTOS — modo mobile: só 3 colunas ===== */
+@media (max-width: 640px){
+  /* Deixa as colunas restantes ocuparem o espaço total */
+  .pay-table{ table-layout: auto !important; }
+
+  /* Some com Forma (3ª) e Acumulado (4ª) no header e no corpo */
+  .pay-table thead th:nth-child(3),
+  .pay-table thead th:nth-child(4),
+  .pay-table tbody td:nth-child(3),
+  .pay-table tbody td:nth-child(4){ display:none; }
+
+  /* Zera as larguras do colgroup dessas colunas para não “reservar” espaço */
+  .pay-table col.col-forma,
+  .pay-table col.col-acum{ width:0 !important; }
+
+  /* Tfoot: esconde a versão desktop e mostra a versão mobile (3 colunas) */
+  .pay-table tfoot tr.sum-desktop{ display:none; }
+  .pay-table tfoot tr.sum-mobile{ display:table-row; }
+}
+
+/* Desktop: mantém 5 colunas e esconde a linha mobile */
+@media (min-width: 641px){
+  .pay-table tfoot tr.sum-mobile{ display:none; }
+}
