@@ -1046,3 +1046,31 @@ html, body, .container, .wrap { overflow-x: clip; }
   .addons-head, .addons-body{ table-layout: fixed; width: 100%; }
 }
 .container { width:100% !important; max-width:1500px !important; padding-inline:10px !important; }
+
+/* ===== EVOLUÇÃO DOS PAGAMENTOS — colunas fixas e sem vazamento ===== */
+.table-wrap.pay { overflow-x: auto; max-width: 100%; }
+.pay-table { table-layout: fixed !important; width: 100%; border-collapse: collapse; }
+
+/* Larguras – ajuste fino p/ mobile */
+.pay-table col.col-data  { width: 18%; }
+.pay-table col.col-valor { width: 22%; }
+.pay-table col.col-forma { width: 18%; }
+.pay-table col.col-acum  { width: 21%; }
+.pay-table col.col-saldo { width: 21%; }
+
+/* Cabeçalho pode quebrar; números não quebram para não “picotar” moeda */
+.pay-table thead th { white-space: normal !important; line-height: 1.2; }
+.pay-table tbody td,
+.pay-table tfoot td { white-space: nowrap !important; overflow: hidden; text-overflow: ellipsis; }
+
+/* Tipografia um pouco mais compacta no mobile */
+@media (max-width: 480px){
+  .pay-table thead th { font-size: 12px; }
+  .pay-table tbody td, .pay-table tfoot td { font-size: 12.5px; }
+  /* leve ajuste nas larguras no bem estreito */
+  .pay-table col.col-data  { width: 20%; }
+  .pay-table col.col-valor { width: 22%; }
+  .pay-table col.col-forma { width: 18%; }
+  .pay-table col.col-acum  { width: 20%; }
+  .pay-table col.col-saldo { width: 20%; }
+}
