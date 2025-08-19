@@ -1045,3 +1045,4 @@ html, body, .container, .wrap { overflow-x: clip; }
   .addons-scroll{ overflow-y: auto; }
   .addons-head, .addons-body{ table-layout: fixed; width: 100%; }
 }
+.container { width:100% !important; max-width:1500px !important; padding-inline:10px !important; }
