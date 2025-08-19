@@ -52,14 +52,6 @@ const F_MAP = {
   15: 'PIX',
 };
 const fmtForma = (v) => F_MAP[Number(v)] || String(v ?? '');
-
-const abrirWhats = (phone, motivo) => {
-  const msg = encodeURIComponent(`Olá! Quero realizar um novo pagamento (${motivo}).`);
-  if (typeof window !== 'undefined') {
-    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
-  }
-};
-
 const copiarPix = async () => {
   try {
     await navigator.clipboard.writeText(PIX_KEY);
@@ -181,6 +173,13 @@ export default function Dashboard() {
   const invoiceIdQS = sp.get('invoice_id') || '';
   const vendedor = sp.get('vendedor') || '';
   const sellerPhone = SELLER_WA[vendedor] || WHATS_NUMBER; // fallback se vier vazio/desconhecido
+
+  const abrirWhats = (motivo) => {
+    const msg = encodeURIComponent(`Olá! Quero realizar um novo pagamento (${motivo}).`);
+    if (typeof window !== 'undefined') {
+      window.open(`https://wa.me/${sellerPhone}?text=${msg}`, '_blank');
+    }
+  };
 
   const [data, setData] = useState(null);
   const [err, setErr] = useState('');
