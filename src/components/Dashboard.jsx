@@ -681,7 +681,7 @@ export default function Dashboard() {
         .wrap { width: 100%; max-width: 1500px; margin: 0 auto; padding: 0 10px; box-sizing: border-box; }
         .card-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; margin-bottom: 18px; }
         .left-col { display: grid; gap: 14px; }
-        .viewer-panel .viewer-inner { width: 100%; height: 560px; display: grid; place-items: center; }
+        .viewer-panel .viewer-inner { width: 100%; height: 100%; display: grid; place-items: center; }
         .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         @media (max-width: 1100px){ .grid-2{ grid-template-columns: 1fr; } }
         @media (max-width: 700px){ .card-grid{ grid-template-columns: 1fr; } }
