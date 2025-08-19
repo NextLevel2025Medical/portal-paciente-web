@@ -3,7 +3,6 @@ import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { useEffect, useMemo, useRef } from "react";
-import { OrbitControls } from '@react-three/drei';
 
 const DEBUG =
   (typeof window !== 'undefined' && (new URLSearchParams(window.location.search).get('debug') === '1')) ||
