@@ -482,7 +482,7 @@ function createMaskedMaterial(baseColor = "#6b7280", highlightColor = "#e7c268")
   return mat;
 }
 
-function Human({ selecionados = [], color = "#FFFF" }) {
+function Human({ selecionados = [], color = "#e7c268" }) {
   const totalMatsRef   = useRef(0);
   const readyMatsRef   = useRef(0);
   const pendingUniformsRef = useRef(false);
