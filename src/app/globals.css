@@ -801,33 +801,6 @@ html, body { overflow-x: hidden; }
 
 /* ===================== AJUSTES FINOS – MOBILE ===================== */
 
-/* 1) EVOLUÇÃO DOS PAGAMENTOS
-   Seleciona a 1ª tabela que vem logo depois de um .block-title */
-@media (max-width: 980px){
-  .block-title + .panel > .table.compact{
-    table-layout: fixed;
-    width: 100%;
-  }
-  /* colunas proporcionais pensadas para caber “R$ 9.420,00” */
-  .block-title + .panel > .table.compact thead th:nth-child(1){ width: 18%; } /* Data */
-  .block-title + .panel > .table.compact thead th:nth-child(2){ width: 22%; } /* Valor */
-  .block-title + .panel > .table.compact thead th:nth-child(3){ width: 18%; } /* Forma */
-  .block-title + .panel > .table.compact thead th:nth-child(4){ width: 21%; } /* Acumulado */
-  .block-title + .panel > .table.compact thead th:nth-child(5){ width: 21%; } /* Valor a Pagar */
-
-  /* cabeçalho pode quebrar linha (ex.: “Valor a Pagar”), números não */
-  .block-title + .panel > .table.compact thead th{ white-space: normal; }
-  .block-title + .panel > .table.compact tbody td{ white-space: nowrap; }
-
-  /* tipografia compacta + paddings menores */
-  .block-title + .panel > .table.compact th,
-  .block-title + .panel > .table.compact td{
-    font-size: clamp(11px, 3.2vw, 13px);
-    padding: 8px 8px;
-    vertical-align: middle;
-  }
-}
-
 /* 2) POSSIBILIDADES ADICIONAIS
    (a sua lista usa duas <table>: cabeçalho e corpo dentro de um <div> rolável) */
 @media (max-width: 980px){
@@ -871,24 +844,6 @@ html, body { overflow-x: hidden; }
 
 /* ===================== QUEBRA DE TEXTO – MOBILE ===================== */
 @media (max-width: 980px){
-
-  /* 1) EVOLUÇÃO DOS PAGAMENTOS */
-  /* sua tabela é a .table.compact logo após o título "EVOLUÇÃO..." */
-  .block-title + .panel > .table.compact{
-    table-layout: auto;        /* deixa as colunas se adaptarem */
-    width: 100%;
-  }
-  /* cabeçalho e corpo podem quebrar; sem reticências */
-  .block-title + .panel > .table.compact th,
-  .block-title + .panel > .table.compact td{
-    white-space: normal;        /* permite várias linhas */
-    overflow-wrap: anywhere;    /* quebra palavras/valores quando precisar */
-    word-break: break-word;     /* garante quebra em iOS */
-    text-overflow: clip;
-    line-height: 1.25;
-    padding: 8px 8px;
-    vertical-align: top;
-  }
 
   /* botão da área de pagamentos nunca estoura a largura */
   .pay-actions .btn-cta{
