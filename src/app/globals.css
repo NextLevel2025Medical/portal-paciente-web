@@ -1101,3 +1101,9 @@ html, body, .container, .wrap { overflow-x: clip; }
 @media (min-width: 981px){
   .header .logout{ margin-right: 5px; }
 }
+
+.addons-body .consult{
+  font-weight: 600;
+  letter-spacing: .2px;
+  opacity: .95;
+}
