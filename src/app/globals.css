@@ -1116,3 +1116,19 @@ html, body, .container, .wrap { overflow-x: clip; }
 .addons-head{
   padding-right: 16px;        /* compensa a barra (Windows ~16 px) */
 }
+:root{
+  --addons-w-service: 38%;
+  --addons-w-red:     24%;
+  --addons-w-green:   24%;
+  --addons-w-action:  14%;
+}
+
+/* aplica nas duas tabelas (thead e tbody) */
+.addons-head, .addons-body{ table-layout: fixed; width: 100%; border-collapse: separate; border-spacing: 0; }
+.addons-head col.col-service, .addons-body col.col-service{ width: var(--addons-w-service); }
+.addons-head col.col-red,     .addons-body col.col-red    { width: var(--addons-w-red); }
+.addons-head col.col-green,   .addons-body col.col-green  { width: var(--addons-w-green); }
+.addons-head col.col-action,  .addons-body col.col-action { width: var(--addons-w-action); }
+
+/* o corpo rola */
+.addons-scroll{ overflow-y: auto; }
