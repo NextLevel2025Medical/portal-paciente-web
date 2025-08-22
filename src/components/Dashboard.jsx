@@ -5,11 +5,9 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import nextDynamic from 'next/dynamic';
 import Image from 'next/image';
 
-// Viewer (client-only)
 const Viewer = nextDynamic(() => import('../app/visualizador/Viewer'), { ssr: false });
 
-// ====== ENV / CONSTANTES ======
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE; // <— defina no Render
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 const SUPPORT_WHATS = process.env.NEXT_PUBLIC_SUPPORT_WHATS || '55SEUNUMERO';
 const PIX_KEY = process.env.NEXT_PUBLIC_PIX_KEY || 'financeiro@drgustavoaquino.com.br';
 const WHATS_NUMBER = process.env.NEXT_PUBLIC_WHATS_NUMBER || SUPPORT_WHATS;
@@ -20,7 +18,6 @@ const SELLER_WA = {
   Carolina: '553195426283',
 };
 
-// ====== FUNÇÕES UTILITÁRIAS / MAPS (vêm do topo do seu arquivo) ======
 const fmtBRL = (v) =>
   new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v);
 
@@ -58,15 +55,11 @@ const copiarPix = async () => {
   } catch {}
 };
 
-// === Palavras-chave -> regiões do Viewer ===
 const KEYWORDS_MAP = {
   face: ['blefaroplastia', 'facial'],
   braco: ['braço', 'braco', 'deltóide', 'deltoide'],
   mama: ['mastopexia', 'mamoplastia', 'silicone', 'mama', 'sutiã', 'sutia'],
   abdomen: [
-    'abdômen',
-    'abdomem',
-    'abdomen',
     'abdominoplastia',
     'LIPO ULTRASSONICA VASER HD FEM 360 COM MICROAIRE E MARCACAO BODY& ART COMPLEXA',
     'UGRAFT (LIPOENXERTIA GUIADA POR ULTRASOM DO RETO ABDOMINAL)',
@@ -78,12 +71,10 @@ const KEYWORDS_MAP = {
   gluteos: ['heart shape', 'glúteos', 'gluteos', 'glútea', 'glutea', 'bumbum'],
   costas: ['costas', 'dorsal'],
   umbigo: ['pdo umbilical', 'umbilical', 'umbigo'],
-  pescoco: ['pescoço', 'pescoco', 'cervical'],
+  pescoco: ['pescoço', 'cervical'],
   intima: [
     'estética íntima',
     'intima',
-    'vagina',
-    'vulva',
     'pubis',
     'monte de venus',
     'MICROFAT EM GRANDES LABIOS',
@@ -91,7 +82,6 @@ const KEYWORDS_MAP = {
   ],
 };
 
-// === Universo de regiões “nucleares” que podem ser sugeridas ===
 const ALL_REGIONS = [
   'face',
   'braco',
@@ -105,7 +95,6 @@ const ALL_REGIONS = [
   'intima',
 ];
 
-// Catálogo (rótulo + preços) usado para montar sugestões
 const REGION_OFFERS = {
   face: { nome: 'Procedimentos para Face', avulso: "-", momento: "-" },
   braco: { nome: 'Lipo de Braços', avulso: "", momento: "" },
@@ -161,7 +150,6 @@ function collectRegionsFromData(data) {
   return found.size ? Array.from(found) : ['abdomen']; // fallback
 }
 
-// ====== COMPONENTE ======
 export default function Dashboard() {
   const sp = useSearchParams();
   const router = useRouter();
@@ -183,12 +171,10 @@ export default function Dashboard() {
   const [data, setData] = useState(null);
   const [err, setErr] = useState('');
 
-  // modal de pagamento
   const [payModalOpen, setPayModalOpen] = useState(false);
   const [showPix, setShowPix] = useState(false);
   const [lastGood, setLastGood] = useState(null);
 
-  // seleção de adicionais
   const [ofertasSelecionadas, setOfertasSelecionadas] = useState([]);
   const toggleOferta = (idx) => {
     setOfertasSelecionadas((prev) =>
@@ -207,7 +193,6 @@ export default function Dashboard() {
     window.open(`https://wa.me/${sellerPhone}?text=${msg}`, '_blank');
   };
 
-  // ====== FETCH ======
   useEffect(() => {
     if (!patientId) return;
     const base = `${API_BASE}/patient/${patientId}/summary`;
@@ -224,7 +209,6 @@ export default function Dashboard() {
       .catch(() => setErr('Erro ao carregar dados'));
   }, [patientId, cpf, invoiceIdQS]);
 
-  // ====== TABELA DE PAGAMENTOS ======
   const linhas = useMemo(() => {
     if (!data) return { rows: [], total: fmtBRL(0), pago: fmtBRL(0), saldo: fmtBRL(0) };
     const pagamentos = Array.isArray(data.pagamentos) ? data.pagamentos : [];
@@ -250,7 +234,6 @@ export default function Dashboard() {
     return { rows, total: fmtBRL(totalN), pago: fmtBRL(pagoN), saldo: fmtBRL(saldoN) };
   }, [data]);
 
-  // ====== STATUS DE AGENDA ======
   const toDateOnly = (s) => {
     try {
       const [y, m, d] = String(s).split('-').map(Number);
@@ -279,7 +262,6 @@ export default function Dashboard() {
     return { cls: 'missed', label: 'Perdido' };
   };
 
-  // Regiões para o Viewer
   const viewerRegions = useMemo(() => collectRegionsFromData(data), [data]);
   const purchasedRegions = viewerRegions || [];
   const regionSuggsAll = buildRegionSuggestions(purchasedRegions);
@@ -320,7 +302,6 @@ export default function Dashboard() {
     ? `https://wa.me/${sellerPhone}?text=${encodeURIComponent(waMsg)}`
     : '#';
 
-  // ====== JSX ======
   return (
     <div className="wrap">
       {/* HEADER */}
@@ -472,27 +453,32 @@ export default function Dashboard() {
                                 </span>
                             </td>
                             <td className="col-red">
-                            {(() => {
+                              {/* 
+                              {(() => {
                                 const m = (fmtBRL(o.avulso) || '').match(/^([^\d]+)\s*(.+)$/);
                                 return (
-                                <span className="price-stack">
+                                  <span className="price-stack">
                                     <span className="curr">{m?.[1] ?? 'R$'}</span>
                                     <span className="amt">{m?.[2] ?? fmtBRL(o.avulso)}</span>
-                                </span>
+                                  </span>
                                 );
-                            })()}
+                              })()}
+                              */}
+                              <span className="consult">A consultar</span>
                             </td>
-
                             <td className="col-green">
-                            {(() => {
-                                const m = (fmtBRL(o.momento) || '').match(/^([^\d]+)\s*(.+)$/);
+                              {/* 
+                              {(() => {
+                                const m = (fmtBRL(o.avulso) || '').match(/^([^\d]+)\s*(.+)$/);
                                 return (
-                                <span className="price-stack">
+                                  <span className="price-stack">
                                     <span className="curr">{m?.[1] ?? 'R$'}</span>
-                                    <span className="amt">{m?.[2] ?? fmtBRL(o.momento)}</span>
-                                </span>
+                                    <span className="amt">{m?.[2] ?? fmtBRL(o.avulso)}</span>
+                                  </span>
                                 );
-                            })()}
+                              })()}
+                              */}
+                              <span className="consult">A consultar</span>
                             </td>
                             <td className="col-action">
                                 <input
