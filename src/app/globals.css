@@ -1132,3 +1132,7 @@ html, body, .container, .wrap { overflow-x: clip; }
 
 /* o corpo rola */
 .addons-scroll{ overflow-y: auto; }
+
+/* o header usa a mesma largura útil do body */
+.addons-head{ width: calc(100% - var(--sbw, 0px)); }
+
