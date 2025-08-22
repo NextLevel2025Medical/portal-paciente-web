@@ -920,9 +920,9 @@ html, body { overflow-x: hidden; }
 .grid-2 > * { min-width: 0; }
 /* ===== Possibilidades Adicionais: alinhamento de colunas ===== */
 :root{
-  --addons-w-service: 50%;
-  --addons-w-red: 20%;
-  --addons-w-green: 20%;
+  --addons-w-service: 30%;
+  --addons-w-red: 30%;
+  --addons-w-green: 30%;
   --addons-w-action: 10%;
 }
 @media (max-width: 480px){
