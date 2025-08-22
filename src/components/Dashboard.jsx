@@ -193,6 +193,23 @@ export default function Dashboard() {
     window.open(`https://wa.me/${sellerPhone}?text=${msg}`, '_blank');
   };
 
+  // mede a largura da scrollbar e salva em --sbw (roda 1x)
+  useEffect(() => {
+    const outer = document.createElement('div');
+    outer.style.cssText = 'visibility:hidden;overflow:scroll;position:absolute;top:-9999px;width:120px;height:120px';
+    document.body.appendChild(outer);
+
+    const inner = document.createElement('div');
+    inner.style.width = '100%';
+    outer.appendChild(inner);
+
+    const sbw = outer.offsetWidth - inner.offsetWidth; // scrollbar width
+    document.documentElement.style.setProperty('--sbw', `${sbw}px`);
+
+    document.body.removeChild(outer);
+  }, []);
+
+  // carrega os dados (depende dos params)
   useEffect(() => {
     if (!patientId) return;
     const base = `${API_BASE}/patient/${patientId}/summary`;
@@ -201,11 +218,10 @@ export default function Dashboard() {
       : invoiceIdQS
       ? `?invoice_id=${encodeURIComponent(invoiceIdQS)}&debug=1`
       : '?debug=1';
-    const url = base + qs;
 
-    fetch(url, { cache: 'no-store' })
-      .then((r) => r.json())
-      .then((j) => setData(j))
+    fetch(base + qs, { cache: 'no-store' })
+      .then(r => r.json())
+      .then(j => setData(j))
       .catch(() => setErr('Erro ao carregar dados'));
   }, [patientId, cpf, invoiceIdQS]);
 
