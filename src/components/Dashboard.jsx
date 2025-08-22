@@ -107,16 +107,15 @@ const ALL_REGIONS = [
 
 // Catálogo (rótulo + preços) usado para montar sugestões
 const REGION_OFFERS = {
-  face: { nome: 'Procedimentos para Face', avulso: 15000, momento: 12000 },
-  braco: { nome: 'Lipo de Braços', avulso: 9000, momento: 7500 },
-  mama: { nome: 'Mastopexia / Mamoplastia', avulso: 18000, momento: 15000 },
-  abdomen: { nome: 'Lipo / Abdominoplastia', avulso: 20000, momento: 17000 },
-  coxa: { nome: 'Lipo de Coxas', avulso: 12000, momento: 9900 },
-  gluteos: { nome: 'Lipoenxertia Glútea', avulso: 16000, momento: 13500 },
-  costas: { nome: 'Lipo Dorsal', avulso: 11000, momento: 9500 },
-  umbigo: { nome: 'PDO Umbilical', avulso: 3500, momento: 3000 },
-  pescoco: { nome: 'Lipo Cervical', avulso: 8000, momento: 6800 },
-  intima: { nome: 'Estética Íntima', avulso: 7000, momento: 5900 },
+  face: { nome: 'Procedimentos para Face', avulso: "", momento: "" },
+  braco: { nome: 'Lipo de Braços', avulso: "", momento: "" },
+  mama: { nome: 'Mastopexia / Mamoplastia', avulso: "", momento: "" },
+  abdomen: { nome: 'Lipo / Abdominoplastia', avulso: "", momento: "" },
+  coxa: { nome: 'Lipo de Coxas', avulso: "", momento: "" },
+  gluteos: { nome: 'Lipoenxertia Glútea', avulso: "", momento: "" },
+  costas: { nome: 'Lipo Dorsal', avulso: "", momento: "" },
+  pescoco: { nome: 'Lipo Cervical', avulso: "", momento: "" },
+  intima: { nome: 'Estética Íntima', avulso: "", momento: "" },
 };
 
 function buildRegionSuggestions(purchasedRegions, limit = Infinity) {
