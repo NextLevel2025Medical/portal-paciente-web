@@ -107,7 +107,7 @@ const ALL_REGIONS = [
 
 // Catálogo (rótulo + preços) usado para montar sugestões
 const REGION_OFFERS = {
-  face: { nome: 'Procedimentos para Face', avulso: "", momento: "" },
+  face: { nome: 'Procedimentos para Face', avulso: "-", momento: "-" },
   braco: { nome: 'Lipo de Braços', avulso: "", momento: "" },
   mama: { nome: 'Mastopexia / Mamoplastia', avulso: "", momento: "" },
   abdomen: { nome: 'Lipo / Abdominoplastia', avulso: "", momento: "" },
