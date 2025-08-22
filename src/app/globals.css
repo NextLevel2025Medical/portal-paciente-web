@@ -1107,3 +1107,12 @@ html, body, .container, .wrap { overflow-x: clip; }
   letter-spacing: .2px;
   opacity: .95;
 }
+/* Corpo rola; header reserva a mesma largura da barra */
+.addons-scroll{
+  overflow-y: auto;
+  scrollbar-gutter: stable;   /* onde suportado mantém a largura “reservada” */
+}
+
+.addons-head{
+  padding-right: 16px;        /* compensa a barra (Windows ~16 px) */
+}
