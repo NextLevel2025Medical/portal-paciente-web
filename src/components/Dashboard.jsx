@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState, useCallback } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import nextDynamic from 'next/dynamic';
 import Image from 'next/image';
 
@@ -151,15 +151,14 @@ function collectRegionsFromData(data) {
 }
 
 export default function Dashboard() {
-  const sp = useSearchParams();
   const router = useRouter();
+  const [user, setUser] = useState(null);
+  const sellerPhone = user?.wa_number || SELLER_WA[user?.vendedor] || WHATS_NUMBER;
 
-  const patientId = sp.get('patient_id');
-  const name = decodeURIComponent(sp.get('name') || 'Paciente ');
-  const cpf = sp.get('cpf');
-  const invoiceIdQS = sp.get('invoice_id') || '';
-  const vendedor = sp.get('vendedor') || '';
-  const sellerPhone = SELLER_WA[vendedor] || WHATS_NUMBER;
+  const sair = async () => {
+    await fetch(`${API_BASE}/auth/logout`, { method: 'POST', credentials: 'include' });
+    router.push('/login');
+  };
 
   const abrirWhats = useCallback((motivo) => {
     const msg = `Olá! Quero realizar um novo pagamento (${motivo}).`;
@@ -211,19 +210,17 @@ export default function Dashboard() {
 
   // carrega os dados (depende dos params)
   useEffect(() => {
-    if (!patientId) return;
-    const base = `${API_BASE}/patient/${patientId}/summary`;
-    const qs = cpf
-      ? `?cpf=${encodeURIComponent(cpf)}&debug=1`
-      : invoiceIdQS
-      ? `?invoice_id=${encodeURIComponent(invoiceIdQS)}&debug=1`
-      : '?debug=1';
+    (async () => {
+      const meRes = await fetch(`${API_BASE}/auth/me`, { credentials: 'include' });
+      if (!meRes.ok) { router.push('/login'); return; }
+      const me = await meRes.json();
+      setUser(me); // { name, patient_id, vendedor, ... }
 
-    fetch(base + qs, { cache: 'no-store' })
-      .then(r => r.json())
-      .then(j => setData(j))
-      .catch(() => setErr('Erro ao carregar dados'));
-  }, [patientId, cpf, invoiceIdQS]);
+      const sumRes = await fetch(`${API_BASE}/me/summary?debug=0`, { credentials: 'include' });
+      const sum = await sumRes.json();
+      setData(sum);
+    })();
+  }, []);
 
   const linhas = useMemo(() => {
     if (!data) return { rows: [], total: fmtBRL(0), pago: fmtBRL(0), saldo: fmtBRL(0) };
@@ -300,20 +297,11 @@ export default function Dashboard() {
   })();
   const viewerRegionsCombined = Array.from(new Set([...(purchasedRegions || []), ...extraRegions]));
 
-  if (!patientId) {
-    return (
-      <p>
-        Faltou o ID do paciente.{' '}
-        <a className="link" onClick={() => router.push('/login')}>
-          Voltar
-        </a>
-      </p>
-    );
-  }
   if (err) return <p style={{ color: '#ef4444' }}>{err}</p>;
   if (!data) return <p>Carregando…</p>;
 
-  const waMsg = `Olá, eu me chamo ${name} e tenho uma dúvida sobre a minha cirurgia.`;
+  const displayName = data?.paciente?.nome || user?.name || 'Paciente';
+  const waMsg = `Olá, eu me chamo ${displayName} e tenho uma dúvida sobre a minha cirurgia.`;
   const waLink = sellerPhone
     ? `https://wa.me/${sellerPhone}?text=${encodeURIComponent(waMsg)}`
     : '#';
@@ -332,14 +320,14 @@ export default function Dashboard() {
               sizes="(max-width: 700px) 60vw, 220px"
           />
         </div>
-        <a className="link logout" onClick={() => router.push('/login')}>
+        <a className="link logout" onClick={sair}>
           <img src="/EXIT.png" alt="" className="logout-ico" width="150" height="150" />
           SAIR
         </a>
       </div>
 
       <h2 className="welcome" style={{ margin: '6px 0 18px' }}>
-        {data?.paciente?.nome || name}
+        {displayName}
       </h2>
 
       {/* KPIs */}
@@ -685,7 +673,7 @@ export default function Dashboard() {
       {/* SAIR (somente mobile, no fim da página) */}
       <a
       className="link logout logout-footer"
-      onClick={() => router.push('/login')}
+      onClick={sair}
       >
       <img src="/EXIT.png" alt="" className="logout-ico" width="150" height="150" />
       SAIR
