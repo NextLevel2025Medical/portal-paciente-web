@@ -96,14 +96,13 @@ const ALL_REGIONS = [
 ];
 
 const REGION_OFFERS = {
-  face: { nome: 'Procedimentos para Face', avulso: "-", momento: "-" },
+  face: { nome: 'Núcleo de Dermatologia', avulso: "-", momento: "-" },
   braco: { nome: 'Lipo de Braços', avulso: "", momento: "" },
   mama: { nome: 'Mastopexia / Mamoplastia', avulso: "", momento: "" },
   abdomen: { nome: 'Lipo / Abdominoplastia', avulso: "", momento: "" },
   coxa: { nome: 'Lipo de Coxas', avulso: "", momento: "" },
   gluteos: { nome: 'Lipoenxertia Glútea', avulso: "", momento: "" },
-  costas: { nome: 'Lipo Dorsal', avulso: "", momento: "" },
-  pescoco: { nome: 'Lipo Cervical', avulso: "", momento: "" },
+  pescoco: { nome: 'Lipo de Submento', avulso: "", momento: "" },
   intima: { nome: 'Estética Íntima', avulso: "", momento: "" },
 };
 
