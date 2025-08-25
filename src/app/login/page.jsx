@@ -28,6 +28,7 @@ export default function LoginPage(){
       const r = await fetch(`${API_BASE}/auth/login`, {
         method:'POST',
         headers:{'Content-Type':'application/json'},
+        credentials: 'include',           // <— necessário para receber o cookie
         body: JSON.stringify({ cpf: onlyDigits(cpf), password })
       })
       if(!r.ok){
@@ -36,12 +37,7 @@ export default function LoginPage(){
       }
       const j = await r.json()
       // TODO: salvar token se necessário
-      router.push(
-        `/dashboard?patient_id=${encodeURIComponent(j.patient_id)}` +
-        `&name=${encodeURIComponent(j.name)}` +
-        `&cpf=${encodeURIComponent(j.cpf)}` +
-        `&vendedor=${encodeURIComponent(j.vendedor || '')}`
-      );
+      router.push('/dashboard');          // <— sem query string
     }catch(e){
       setErr(e.message || 'Não foi possível entrar')
     }finally{
