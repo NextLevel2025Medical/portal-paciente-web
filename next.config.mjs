@@ -6,7 +6,7 @@ const nextConfig = {
       {
         source: '/api/:path*',
         // troque pela URL pública do SEU FastAPI no Render:
-        destination: 'https://portal-paciente-backend.onrender.com',
+        destination: 'https://portal-paciente-backend.onrender.com/:path*',
       },
     ];
   },
