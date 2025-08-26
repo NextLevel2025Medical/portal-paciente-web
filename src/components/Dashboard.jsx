@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 const Viewer = nextDynamic(() => import('../app/visualizador/Viewer'), { ssr: false });
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE || '/api';
 const SUPPORT_WHATS = process.env.NEXT_PUBLIC_SUPPORT_WHATS || '55SEUNUMERO';
 const PIX_KEY = process.env.NEXT_PUBLIC_PIX_KEY || 'financeiro@drgustavoaquino.com.br';
 const WHATS_NUMBER = process.env.NEXT_PUBLIC_WHATS_NUMBER || SUPPORT_WHATS;
