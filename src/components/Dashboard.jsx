@@ -213,6 +213,7 @@ export default function Dashboard() {
       const meRes = await fetch(`${API_BASE}/auth/me`, { credentials: 'include' });
       if (!meRes.ok) { router.push('/login'); return; }
       const me = await meRes.json();
+      if (me?.is_admin) { router.push('/admin'); return; }
       setUser(me); // { name, patient_id, vendedor, ... }
 
       const sumRes = await fetch(`${API_BASE}/me/summary?debug=0`, { credentials: 'include' });
