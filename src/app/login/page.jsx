@@ -37,7 +37,8 @@ export default function LoginPage(){
       }
       const j = await r.json()
       // TODO: salvar token se necessário
-      router.push('/dashboard');          // <— sem query string
+      if (j?.is_admin) router.push('/admin');
+      else router.push('/dashboard');
     }catch(e){
       setErr(e.message || 'Não foi possível entrar')
     }finally{
