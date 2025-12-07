@@ -18,7 +18,7 @@ export default function AdminPage(){
   const [users, setUsers] = useState([])
 
   const vendedores = useMemo(() => ([
-    '', 'Johnny', 'Rayane', 'Thiago'
+    '', 'Johnny', 'Ana Maria', 'Carol'
   ]), [])
 
   const sair = async () => {
