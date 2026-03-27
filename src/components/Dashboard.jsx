@@ -217,6 +217,13 @@ export default function Dashboard() {
       setUser(me); // { name, patient_id, vendedor, ... }
 
       const sumRes = await fetch(`${API_BASE}/me/summary?debug=0`, { credentials: 'include' });
+
+      if (!sumRes.ok) {
+        const j = await sumRes.json().catch(() => ({}));
+        setErr(j?.detail || 'Não foi possível carregar o resumo do paciente.');
+        return;
+      }
+
       const sum = await sumRes.json();
       setData(sum);
     })();
